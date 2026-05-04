@@ -38,7 +38,7 @@ Learn more at [quillmark.ai](https://quillmark.ai).
 
 ## License
 
-Planned license: Apache-2.0.
+Apache-2.0.
 
 ## Disclaimer
 
