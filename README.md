@@ -42,4 +42,4 @@ Apache-2.0.
 
 ## Disclaimer
 
-Compliance Flag does not provide legal advice, compliance advice, investment advice, regulatory approval, guaranteed compliance, or final review decisions. Outputs are drafts and review aids for qualified human review.
+Quillmark LLC is not a law firm and does not provide legal, compliance, regulatory, investment, tax, accounting, or financial advice. Reports, articles, and content drafts are for informational and operational purposes only and should be reviewed by qualified personnel before use. Neither Quillmark LLC or the Compliance Flag Codex plugin can determine if any communication meets all applicable requirements and are not affiliated with, endorsed by, or acting on behalf of the SEC or FINRA. Regulatory and enforcement references are based on public sources and may not reflect later developments.
