@@ -32,9 +32,7 @@ Installation instructions, examples, documentation, and contribution guidance wi
 
 ## Maintainer
 
-Compliance Flag is a Quillmark Open Source project maintained by Quillmark LLC.
-
-Learn more at [quillmark.ai](https://quillmark.ai).
+Compliance Flag is a [Quillmark Open Source](https://github.com/quillmark-open-source) project maintained by [Quillmark LLC](https://quillmark.ai/).
 
 ## License
 
