@@ -40,6 +40,15 @@ def validate_report(report: dict) -> None:
 
 def repair_report_shape(report: dict) -> None:
     """Fill deterministic report fields that models may occasionally omit."""
+    if (
+        isinstance(report.get("report"), dict)
+        and isinstance(report.get("findings"), list)
+    ):
+        body = report["report"]
+        if not body.get("findings"):
+            body["findings"] = report["findings"]
+        report.pop("findings", None)
+
     body = report.get("report", report)
     for finding in body.get("findings", []):
         rule = finding.get("rule")

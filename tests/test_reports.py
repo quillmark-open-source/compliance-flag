@@ -55,6 +55,46 @@ def test_repair_report_shape_adds_missing_rule_description():
     assert "Substantiation Requirement" in description
 
 
+def test_repair_report_shape_moves_top_level_findings_into_report():
+    report = {
+        "report": {
+            "findings": [],
+            "summary": {
+                "total_findings": 0,
+                "by_severity": {
+                    "critical": 0,
+                    "high": 0,
+                    "medium": 0,
+                    "low": 0,
+                },
+                "by_category": {},
+            },
+        },
+        "findings": [
+            {
+                "severity": "high",
+                "category": "general_prohibitions",
+                "rule": {
+                    "authority": "SEC",
+                    "citation": "§ 275.206(4)-1(a)(4)",
+                    "rule_name": "Benefits Without Risks or Limitations",
+                    "description": "Benefits must be fair and balanced.",
+                },
+            }
+        ],
+    }
+
+    repair_report_shape(report)
+    fix_summary(report)
+
+    assert "findings" not in report
+    assert report["report"]["summary"]["total_findings"] == 1
+    assert report["report"]["summary"]["by_severity"]["high"] == 1
+    assert report["report"]["findings"][0]["rule"]["citation"] == (
+        "§ 275.206(4)-1(a)(4)"
+    )
+
+
 def test_repair_report_shape_converts_string_remediation():
     report = {
         "report": {
