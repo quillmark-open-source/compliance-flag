@@ -9,6 +9,14 @@ from compliance_flag.reports.schema import (
 )
 
 
+def test_report_disclaimer_restricts_use_to_authorized_content():
+    text = REPORT_DISCLAIMER["text"]
+
+    assert "authorized personnel" in text
+    assert "explicit permission" in text
+    assert "third-party websites" in text
+
+
 def test_extract_json_from_markdown_fence():
     assert extract_json('before\n```json\n{"ok": true}\n```\nafter') == {"ok": True}
 

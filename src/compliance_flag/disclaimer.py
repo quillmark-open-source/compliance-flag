@@ -8,12 +8,16 @@ REPORT_DISCLAIMER = {
         "tool for identifying potential marketing compliance issues. The report is "
         "for informational and operational review purposes only and does not "
         "constitute legal, compliance, regulatory, investment, tax, accounting, or "
-        "financial advice. Findings are potential issues for review by qualified "
-        "personnel and are not final determinations that any communication violates "
-        "or satisfies applicable requirements. Compliance Flag is not affiliated "
-        "with, endorsed by, or acting on behalf of the SEC or any other "
-        "regulator. Regulatory references are based on bundled/public source "
-        "materials and may not reflect later developments."
+        "financial advice. Compliance Flag is intended only for authorized "
+        "personnel reviewing websites, files, or other content they own, control, "
+        "administer, or have explicit permission to assess. Do not use Compliance "
+        "Flag to scan third-party websites or content without authorization. "
+        "Findings are potential issues for review by qualified personnel and are "
+        "not final determinations that any communication violates or satisfies "
+        "applicable requirements. Compliance Flag is not affiliated with, endorsed "
+        "by, or acting on behalf of the SEC or any other regulator. Regulatory "
+        "references are based on bundled/public source materials and may not "
+        "reflect later developments."
     ),
 }
 

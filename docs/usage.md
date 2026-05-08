@@ -14,6 +14,8 @@ Supported local file types are `.html`, `.htm`, `.md`, and `.txt`.
 compliance-flag scan --url https://example.com
 ```
 
+URL mode is only for public pages you own, control, administer, or have explicit permission to assess. Do not run URL scans against third-party websites without authorization.
+
 URL mode captures the page content first, saves the raw source material, and analyzes that captured content.
 
 ## Output

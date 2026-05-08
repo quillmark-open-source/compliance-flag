@@ -28,7 +28,7 @@ def build_parser() -> argparse.ArgumentParser:
     scan = subparsers.add_parser("scan", help="scan a URL or local file")
     source = scan.add_mutually_exclusive_group(required=True)
     source.add_argument("--file", help="local .html, .htm, .md, or .txt file")
-    source.add_argument("--url", help="public URL to fetch and scan")
+    source.add_argument("--url", help="authorized public URL to fetch and scan")
     scan.add_argument("--out", default="reports", help="output directory")
     scan.add_argument("--model", help="Anthropic model name")
     scan.set_defaults(func=run_scan)

@@ -15,3 +15,5 @@ compliance-flag scan --file tests/fixtures/example-blog-post.html
 ```
 
 Generated reports are written to `reports/` by default.
+
+Only scan local files, websites, or pages that you own, control, administer, or have explicit permission to assess.

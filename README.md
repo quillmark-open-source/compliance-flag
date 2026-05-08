@@ -1,6 +1,6 @@
 # Compliance Flag
 
-Compliance Flag is an open-source Python CLI for generating reviewer-ready reports that flag potential SEC Marketing Rule issues in public URLs and local content files.
+Compliance Flag is an open-source Python CLI for generating reviewer-ready reports that flag potential SEC Marketing Rule issues in authorized public URLs and local content files.
 
 The project helps teams capture source material, analyze RIA marketing content against bundled regulatory source material, and produce structured reports for qualified compliance, legal, or supervisory review.
 
@@ -37,7 +37,7 @@ Scan a local file:
 compliance-flag scan --file tests/fixtures/example-blog-post.html
 ```
 
-Scan a public URL:
+Scan an authorized public URL:
 
 ```bash
 compliance-flag scan --url https://example.com
@@ -59,6 +59,8 @@ Each scan writes:
 ## Intended Use
 
 Compliance Flag is a review-support tool. It is not a compliance approval system, legal reviewer, or substitute for qualified professional judgment.
+
+Only use Compliance Flag on websites, files, pages, or other content that you own, control, administer, or have explicit permission to assess. Do not run URL scans against third-party websites without authorization.
 
 The initial project focus is SEC Rule 275.206(4)-1, Investment adviser marketing. Related SEC sources may be used as supporting context where appropriate.
 
