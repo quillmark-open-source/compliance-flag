@@ -139,6 +139,8 @@ celerybeat.pid
 
 # Environments
 .env
+.env.*
+!.env.example
 .envrc
 .venv
 env/
@@ -225,3 +227,6 @@ credentials.json
 # Obsidian
 .obsidian/
 
+# Compliance Flag local outputs
+/reports/
+legacy_alpha/

@@ -1,22 +1,60 @@
 # Compliance Flag
 
-Compliance Flag is an open-source Codex plugin and workflow package for SEC Marketing Rule website review.
+Compliance Flag is an open-source Python CLI for generating reviewer-ready reports that flag potential SEC Marketing Rule issues in public URLs and local content files.
 
-The project is being built to help teams collect public RIA website pages, preserve the page evidence, and use Codex to draft findings that a qualified compliance, legal, or supervisory reviewer can evaluate.
+The project helps teams capture source material, analyze RIA marketing content against bundled regulatory source material, and produce structured reports for qualified compliance, legal, or supervisory review.
 
-## Coming Soon
+## Status
 
-This repo is in early setup and is not ready for use yet.
+Compliance Flag is moving from alpha to beta. The current package scaffold includes:
 
-The first public version is expected to include:
+- `compliance-flag scan --file` for local `.html`, `.htm`, `.md`, and `.txt` files
+- experimental `compliance-flag scan --url` support that captures page content before analysis
+- structured JSON reports validated against a bundled schema
+- HTML report rendering
+- saved raw source files and source metadata alongside each report
+- bundled prompt, schema, and regulatory source assets migrated from the alpha scanner
 
-- a Codex plugin for SEC Marketing Rule website review
-- workflow guidance for evidence-backed review and report drafting
-- a narrow fetch tool for collecting public website evidence
-- review support centered on SEC Rule 275.206(4)-1
-- sample evidence packets and reviewer-ready report drafts
-- recipes for review, escalation, archiving, and follow-up
-- clear boundaries around human review and professional advice
+## Install For Development
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[dev]"
+```
+
+Set an Anthropic API key before running scans:
+
+```bash
+export ANTHROPIC_API_KEY="..."
+```
+
+## Usage
+
+Scan a local file:
+
+```bash
+compliance-flag scan --file tests/fixtures/example-blog-post.html
+```
+
+Scan a public URL:
+
+```bash
+compliance-flag scan --url https://example.com
+```
+
+Write output to a specific directory:
+
+```bash
+compliance-flag scan --file page.html --out reports/example
+```
+
+Each scan writes:
+
+- a JSON report
+- an HTML report
+- a raw captured source file, such as `.source.html`
+- a source metadata file, `.source-meta.json`
 
 ## Intended Use
 
@@ -24,11 +62,13 @@ Compliance Flag is a review-support tool. It is not a compliance approval system
 
 The initial project focus is SEC Rule 275.206(4)-1, Investment adviser marketing. Related SEC sources may be used as supporting context where appropriate.
 
-## Status
+## Development
 
-Project setup is underway.
-
-Installation instructions, examples, documentation, and contribution guidance will be added before the first usable release.
+```bash
+pytest
+ruff check .
+python -m build
+```
 
 ## Maintainer
 
@@ -36,10 +76,8 @@ Compliance Flag is a [Quillmark Open Source](https://github.com/quillmark-open-s
 
 ## License
 
-Apache-2.0.
+Apache-2.0. See [LICENSE](LICENSE).
 
 ## Disclaimer
 
-Quillmark LLC is not a law firm and does not provide legal, compliance, regulatory, investment, tax, accounting, or financial advice. Reports, articles, and content drafts are for informational and operational purposes only and should be reviewed by qualified personnel before use. Neither Quillmark LLC or the Compliance Flag Codex plugin can determine if any communication meets all applicable requirements and are not affiliated with, endorsed by, or acting on behalf of the SEC or FINRA. Regulatory and enforcement references are based on public sources and may not reflect later developments.
-
-Compliance Flag is an independent plugin designed for use with Codex. Compliance Flag is not endorsed by, sponsored by, or affiliated with OpenAI. OpenAI and Codex are trademarks of OpenAI.
+See [DISCLAIMER.md](DISCLAIMER.md).

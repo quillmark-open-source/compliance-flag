@@ -1,0 +1,17 @@
+name: Rule review issue
+description: Report a possible issue with rule coverage, citations, or report calibration.
+title: "[Rule Review]: "
+labels: ["rule-review"]
+body:
+  - type: textarea
+    id: issue
+    attributes:
+      label: Issue
+      description: Describe the rule, citation, prompt, or report behavior concern.
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source material
+      description: Include public source links or citations. Do not include private client content.
