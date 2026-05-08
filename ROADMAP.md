@@ -1,14 +1,53 @@
 # Roadmap
 
-Compliance Flag is moving from an alpha scanner into a beta-quality open-source CLI. This roadmap tracks near-term work that should improve reliability, cost, reviewer trust, and release readiness.
+Compliance Flag is moving from an alpha scanner into a beta-quality open-source
+CLI and Codex-assisted review workflow. This roadmap tracks near-term work that
+should improve reliability, cost, reviewer trust, and release readiness.
 
-## Beta Priorities
+## Release Track
 
-### 1. Reduce scan token usage with visible-text extraction
+### v0.1.0 - Initial public alpha
+
+Status: current
+
+The first public release is a CLI preview for early testing and feedback. It
+establishes the package structure, SEC-focused scan flow, report schema, HTML
+rendering, source artifact preservation, example report, and baseline project
+documentation.
+
+This release should be considered alpha-quality: useful for controlled review
+support experiments, but not yet a stable compliance workflow or API contract.
+
+### v0.2.0 - Codex plugin beta
+
+Status: next focus
+
+The next major milestone is an OpenAI Codex plugin that wraps the CLI workflow
+for repository-local scans, report generation, and reviewer handoff.
+
+Planned plugin work:
+
+- Provide a Codex-native entry point for running Compliance Flag scans from a
+  local workspace.
+- Guide users through source selection, scan execution, report review, and next
+  actions.
+- Surface generated JSON, HTML, source artifacts, and future screenshots in a
+  reviewer-friendly workflow.
+- Keep SEC Marketing Rule scope, disclaimer behavior, source preservation, and
+  report boundaries consistent with the CLI.
+- Document when to use the CLI directly versus the Codex plugin workflow.
+
+## Improvement Areas
+
+### Reduce scan token usage with visible-text extraction
 
 Status: planned
 
-Current URL scans send the captured HTML document to the model. This preserves context but can be expensive: the first successful beta URL scan captured about 58k page tokens and produced about 105k billed input tokens after regulatory context and prompt assembly. Local `.htm` and `.html` files have the same issue when they include markup, CSS, and JavaScript.
+Current URL scans send the captured HTML document to the model. This preserves
+context but can be expensive: the first successful beta URL scan captured about
+58k page tokens and produced about 105k billed input tokens after regulatory
+context and prompt assembly. Local `.htm` and `.html` files have the same issue
+when they include markup, CSS, and JavaScript.
 
 Planned change:
 
