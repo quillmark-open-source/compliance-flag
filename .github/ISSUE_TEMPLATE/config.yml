@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/quillmark-open-source/compliance-flag/blob/main/SECURITY.md
+    about: Please do not open public issues for suspected vulnerabilities.
+  - name: Support and project scope
+    url: https://github.com/quillmark-open-source/compliance-flag/blob/main/SUPPORT.md
+    about: Read where to ask questions and what belongs in public issues.
+  - name: Documentation
+    url: https://github.com/quillmark-open-source/compliance-flag/tree/main/docs
+    about: Review usage, rule boundaries, and regulatory source notes.

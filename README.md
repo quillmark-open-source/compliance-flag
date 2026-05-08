@@ -1,8 +1,16 @@
 # Compliance Flag
 
+[![CI](https://github.com/quillmark-open-source/compliance-flag/actions/workflows/ci.yml/badge.svg)](https://github.com/quillmark-open-source/compliance-flag/actions/workflows/ci.yml)
+[![Python 3.10-3.13](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-3776ab.svg)](pyproject.toml)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+[![Code style: Ruff](https://img.shields.io/badge/code%20style-ruff-46a146.svg)](https://docs.astral.sh/ruff/)
+[![Status: alpha](https://img.shields.io/badge/status-alpha-orange.svg)](ROADMAP.md)
+
 Compliance Flag is an open-source Python CLI for generating reviewer-ready reports that flag potential SEC Marketing Rule issues in authorized public URLs and local content files.
 
 The project helps teams capture source material, analyze RIA marketing content against bundled regulatory source material, and produce structured reports for qualified compliance, legal, or supervisory review.
+
+**Project Links:** [Documentation](docs/index.md) | [Usage](docs/usage.md) | [Roadmap](ROADMAP.md) | [Changelog](CHANGELOG.md) | [Contributing](CONTRIBUTING.md) | [Security](SECURITY.md)
 
 ## Status
 
