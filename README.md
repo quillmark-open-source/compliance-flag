@@ -6,9 +6,9 @@
 [![Ruff](https://img.shields.io/badge/ruff-enabled-46a146.svg)](https://docs.astral.sh/ruff/)
 [![Status: alpha](https://img.shields.io/badge/status-alpha-orange.svg)](ROADMAP.md)
 
-Compliance Flag is an open-source Python CLI for generating reviewer-ready reports that flag potential SEC Marketing Rule issues in authorized public URLs and local content files.
+Compliance Flag is a Python CLI for creating reviewer-ready reports on public URLs and local content files a team is authorized to review.
 
-The project helps teams capture source material, analyze RIA marketing content against bundled regulatory source material, and produce structured reports for qualified compliance, legal, or supervisory review.
+It helps teams capture source material, compare RIA marketing content with bundled regulatory sources, and prepare structured reports for qualified compliance, legal, or supervisory review.
 
 **Project Links:** [Documentation](docs/index.md) | [Usage](docs/usage.md) | [Roadmap](ROADMAP.md) | [Changelog](CHANGELOG.md) | [Contributing](CONTRIBUTING.md) | [Security](SECURITY.md)
 
