@@ -23,12 +23,16 @@ Compliance Flag is moving from alpha to beta. The current package scaffold inclu
 - saved raw source files and source metadata alongside each report
 - bundled prompt, schema, and regulatory source assets migrated from the alpha scanner
 
-## Install For Development
+## Install
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -e ".[dev]"
+python -m pip install compliance-flag
+```
+
+Or with pipx:
+
+```bash
+pipx install compliance-flag
 ```
 
 Set an Anthropic API key before running scans:
