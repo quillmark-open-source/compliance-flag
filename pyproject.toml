@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "compliance-flag"
-version = "0.1.0"
+version = "0.1.0.post1"
 description = "Python CLI for flagging potential SEC Marketing Rule issues in authorized public URLs and local files."
 readme = "README.md"
 requires-python = ">=3.10"
