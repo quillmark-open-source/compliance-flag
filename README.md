@@ -17,24 +17,26 @@ The analysis is performed by an AI model, so each report is **structured review 
 
 ## Table of Contents
 
-- [Status](#status)
-- [How It Works](#how-it-works)
-- [Requirements](#requirements)
-- [Install](#install)
-- [Quick Start](#quick-start)
-- [Usage](#usage)
-- [Output](#output)
-- [Reading a Report](#reading-a-report)
-- [Configuration](#configuration)
-- [Exit Codes](#exit-codes)
-- [Intended Use](#intended-use)
-- [Regulatory Scope](#regulatory-scope)
-- [Development](#development)
-- [Contributing](#contributing)
-- [Security](#security)
-- [Maintainer](#maintainer)
-- [License](#license)
-- [Disclaimer](#disclaimer)
+- [Compliance Flag](#compliance-flag)
+  - [Table of Contents](#table-of-contents)
+  - [Status](#status)
+  - [How It Works](#how-it-works)
+  - [Requirements](#requirements)
+  - [Install](#install)
+  - [Quick Start](#quick-start)
+  - [Usage](#usage)
+  - [Output](#output)
+  - [Reading a Report](#reading-a-report)
+  - [Configuration](#configuration)
+  - [Exit Codes](#exit-codes)
+  - [Intended Use](#intended-use)
+  - [Regulatory Scope](#regulatory-scope)
+  - [Development](#development)
+  - [Contributing](#contributing)
+  - [Security](#security)
+  - [Maintainer](#maintainer)
+  - [License](#license)
+  - [Disclaimer](#disclaimer)
 
 ## Status
 
@@ -177,7 +179,7 @@ For an annotated end-to-end example, see [examples/reports/example-blog-post-rep
 | --- | --- |
 | `ANTHROPIC_API_KEY` | Required. Authenticates calls to the Anthropic API. |
 
-| Flag | Default | Purpose |
+| Flag&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Default | Purpose |
 | --- | --- | --- |
 | `--file` | — | Local file path (`.html`, `.htm`, `.md`, `.txt`). Mutually exclusive with `--url`. |
 | `--url` | — | Authorized public URL to fetch and scan. Mutually exclusive with `--file`. |
