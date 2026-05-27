@@ -13,12 +13,13 @@ The analysis is performed by an AI model, so each report is **structured review 
 
 ---
 
-**Project Links:** [Documentation](docs/index.md) · [Usage](docs/usage.md) · [Rule Boundaries](docs/rule-boundaries.md) · [Regulatory Sources](docs/regulatory-sources.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Support](SUPPORT.md)
+**Project Links:** [Website](https://complianceflag.com/) · [Documentation](docs/index.md) · [Usage](docs/usage.md) · [Rule Boundaries](docs/rule-boundaries.md) · [Regulatory Sources](docs/regulatory-sources.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Support](SUPPORT.md)
 
 ## Table of Contents
 
 - [Compliance Flag](#compliance-flag)
   - [Table of Contents](#table-of-contents)
+  - [Website](#website)
   - [Status](#status)
   - [How It Works](#how-it-works)
   - [Requirements](#requirements)
@@ -37,6 +38,14 @@ The analysis is performed by an AI model, so each report is **structured review 
   - [Maintainer](#maintainer)
   - [License](#license)
   - [Disclaimer](#disclaimer)
+
+## Website
+
+The project website is [complianceflag.com](https://complianceflag.com/). It provides a plain-language overview for compliance reviewers and technical operators, website-hosted docs, and a public sample report:
+
+- [Website documentation](https://complianceflag.com/docs/)
+- [Sample report](https://complianceflag.com/sample-home-page-audit/)
+- [Project status](https://complianceflag.com/project/)
 
 ## Status
 

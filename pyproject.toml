@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "compliance-flag"
-version = "0.1.0.post1"
+version = "0.1.0.post2"
 description = "Python CLI for flagging potential SEC Marketing Rule issues in authorized public URLs and local files."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -54,7 +54,8 @@ dev = [
 compliance-flag = "compliance_flag.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/quillmark-open-source/compliance-flag"
+Homepage = "https://complianceflag.com/"
+Documentation = "https://complianceflag.com/docs/"
 Issues = "https://github.com/quillmark-open-source/compliance-flag/issues"
 Source = "https://github.com/quillmark-open-source/compliance-flag"
 
