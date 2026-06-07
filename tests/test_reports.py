@@ -1,3 +1,7 @@
+from urllib.parse import urlparse
+
+from bs4 import BeautifulSoup
+
 from compliance_flag.disclaimer import REPORT_DISCLAIMER, report_generator
 from compliance_flag.reports.json_extract import extract_json
 from compliance_flag.reports.render_html import render_html
@@ -341,6 +345,16 @@ def test_render_html_escapes_report_content():
 
     assert "&lt;Firm&gt;" in html
     assert "by Compliance Flag\n      CLI\n      v0.1.0" in html
-    assert "https://complianceflag.com/" in html
+    soup = BeautifulSoup(html, "html.parser")
+    footer_links = [
+        urlparse(link["href"])
+        for link in soup.select(".report-disclaimer a[href]")
+    ]
+    assert any(
+        link.scheme == "https"
+        and link.netloc == "complianceflag.com"
+        and link.path == "/"
+        for link in footer_links
+    )
     assert "automated review-support tool" in html
     assert "<script>bad()</script>" not in html
