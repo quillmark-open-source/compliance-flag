@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1 - 2026-06-07
+
+- Documentation and CLI help release. Clarified that Compliance Flag is an AI-assisted Python CLI that uses Anthropic's Opus model through the user's Anthropic API key.
+- Updated README, repository docs, package metadata, support/contribution notes, and `--model` help text for PyPI resubmission.
+- Updated the report schema to accept package patch versions used by generated report metadata.
+
 ## 0.1.0.post2 - 2026-05-27
 
 - Documentation-only release. Added website references to the README and docs overview so the PyPI package page points readers to complianceflag.com, website-hosted docs, the sample report, and project status.

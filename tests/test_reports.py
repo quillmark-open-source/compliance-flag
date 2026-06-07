@@ -201,6 +201,42 @@ def test_report_schema_accepts_structured_remediation():
     validate_report(report)
 
 
+def test_report_schema_accepts_package_patch_versions():
+    report = {
+        "report": {
+            "id": "11111111-1111-4111-8111-111111111111",
+            "generated_at": "2026-06-07T12:00:00Z",
+            "scanner_version": "0.1.1",
+            "generator": report_generator("0.1.1"),
+            "firm": {"name": "Example Adviser"},
+            "scan": {
+                "started_at": "2026-06-07T12:00:00Z",
+                "completed_at": "2026-06-07T12:01:00Z",
+                "source": {
+                    "type": "file",
+                    "location": "sample.html",
+                    "page_title": "Sample",
+                },
+            },
+            "summary": {
+                "total_findings": 0,
+                "by_severity": {
+                    "critical": 0,
+                    "high": 0,
+                    "medium": 0,
+                    "low": 0,
+                },
+                "by_category": {},
+            },
+            "executive_summary": "No findings.",
+            "disclaimer": REPORT_DISCLAIMER,
+            "findings": [],
+        }
+    }
+
+    validate_report(report)
+
+
 def test_model_output_schema_excludes_hardcoded_disclaimer():
     schema = load_model_output_schema()
     report_schema = schema["properties"]["report"]

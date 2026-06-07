@@ -1,6 +1,6 @@
 # Compliance Flag Documentation
 
-Compliance Flag is a Python CLI for capturing marketing content and producing reports that flag potential SEC Marketing Rule issues for human review.
+Compliance Flag is an AI-assisted Python CLI for capturing marketing content and producing reports that flag potential SEC Marketing Rule issues for human review. The current workflow sends captured source content and bundled SEC regulatory context to Anthropic's Opus model through the user's Anthropic API key.
 
 Use it only on websites, files, pages, or other content that you own, control, administer, or have explicit permission to assess.
 

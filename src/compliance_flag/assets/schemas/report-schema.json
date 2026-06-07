@@ -23,8 +23,8 @@
         },
         "scanner_version": {
           "type": "string",
-          "pattern": "^\\d+\\.\\d+\\.\\d+$",
-          "description": "Semantic version of the scanner that produced the report."
+          "pattern": "^\\d+\\.\\d+\\.\\d+(?:\\.post\\d+)?$",
+          "description": "Package version of the scanner that produced the report."
         },
         "generator": {
           "type": "object",
@@ -42,7 +42,7 @@
             },
             "version": {
               "type": "string",
-              "pattern": "^\\d+\\.\\d+\\.\\d+$",
+              "pattern": "^\\d+\\.\\d+\\.\\d+(?:\\.post\\d+)?$",
               "description": "Version of the generator."
             },
             "website": {

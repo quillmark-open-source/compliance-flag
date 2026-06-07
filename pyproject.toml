@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "compliance-flag"
-version = "0.1.0.post2"
-description = "Python CLI for flagging potential SEC Marketing Rule issues in authorized public URLs and local files."
+version = "0.1.1"
+description = "AI-assisted Python CLI for drafting SEC Marketing Rule review reports with Anthropic's Opus model."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "Apache-2.0"

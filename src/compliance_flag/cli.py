@@ -8,6 +8,7 @@ from compliance_flag import __version__
 from compliance_flag.input.file import load_file
 from compliance_flag.input.url import fetch_url
 from compliance_flag.logging import log
+from compliance_flag.providers.anthropic import DEFAULT_MODEL
 from compliance_flag.reports.render_html import save_html_report
 from compliance_flag.reports.storage import save_report, save_source_artifacts
 from compliance_flag.scanner import scan_document
@@ -30,7 +31,7 @@ def build_parser() -> argparse.ArgumentParser:
     source.add_argument("--file", help="local .html, .htm, .md, or .txt file")
     source.add_argument("--url", help="authorized public URL to fetch and scan")
     scan.add_argument("--out", default="reports", help="output directory")
-    scan.add_argument("--model", help="Anthropic model name")
+    scan.add_argument("--model", help=f"Opus model override (default: {DEFAULT_MODEL})")
     scan.set_defaults(func=run_scan)
 
     return parser

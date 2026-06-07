@@ -7,9 +7,9 @@
 [![Ruff](https://img.shields.io/badge/ruff-enabled-46a146.svg)](https://docs.astral.sh/ruff/)
 [![Status: alpha](https://img.shields.io/badge/status-alpha-orange.svg)](ROADMAP.md)
 
-**Compliance Flag** is a Python CLI that prepares reviewer-ready reports on public URLs and local content files a team is authorized to review. It captures the source material, compares Registered Investment Adviser (RIA) marketing content against bundled SEC regulatory sources, and produces structured findings for qualified compliance, legal, or supervisory review.
+**Compliance Flag** is an AI-assisted Python CLI that prepares reviewer-ready reports on public URLs and local content files a team is authorized to review. It captures the source material, sends the review request to Anthropic's Opus model through the user's Anthropic API key, compares Registered Investment Adviser (RIA) marketing content against bundled SEC regulatory sources, and produces structured findings for qualified compliance, legal, or supervisory review.
 
-The analysis is performed by an AI model, so each report is **structured review support, not a substitute for professional judgment**. See [Intended Use](#intended-use) and [DISCLAIMER.md](DISCLAIMER.md).
+The analysis is performed by Anthropic's Opus model, so each report is **structured review support, not a substitute for professional judgment**. See [Intended Use](#intended-use) and [DISCLAIMER.md](DISCLAIMER.md).
 
 ---
 
@@ -57,6 +57,7 @@ Compliance Flag is moving from alpha to beta. The current package includes:
 - HTML report rendering
 - saved raw source files and source metadata alongside each report
 - bundled prompt, schema, and regulatory source assets migrated from the alpha scanner
+- default analysis with Anthropic's Opus model through the user's Anthropic API key
 
 See [ROADMAP.md](ROADMAP.md) for what is planned next.
 
@@ -65,7 +66,7 @@ See [ROADMAP.md](ROADMAP.md) for what is planned next.
 A `scan` runs four stages:
 
 1. **Input capture** — `--file` reads a supported local file; `--url` fetches a page with `httpx`, applies a `Content-Type` allowlist, and saves the raw bytes.
-2. **Analysis** — the captured document and bundled SEC regulatory sources are sent to an Anthropic model with a versioned prompt and JSON schema.
+2. **Analysis** — the captured document and bundled SEC regulatory sources are sent to Anthropic's Opus model with a versioned prompt and JSON schema.
 3. **Validation** — the model response is parsed and validated against the bundled report schema; invalid output fails the scan.
 4. **Rendering** — the validated report is written as JSON, rendered to HTML, and accompanied by the raw source and source metadata.
 
@@ -74,7 +75,7 @@ The source material is always preserved alongside the report so a reviewer can v
 ## Requirements
 
 - Python **3.10+** (CPython 3.10, 3.11, 3.12, 3.13 are tested)
-- An [Anthropic API key](https://platform.claude.com/settings/keys)
+- An [Anthropic API key](https://platform.claude.com/settings/keys) for Opus model calls
 - Network access for `--url` scans and for model calls
 
 ## Install
@@ -91,7 +92,7 @@ From source (latest `main`):
 pip install git+https://github.com/quillmark-open-source/compliance-flag.git
 ```
 
-Set your API key:
+Set your Anthropic API key:
 
 ```bash
 export ANTHROPIC_API_KEY="..."
@@ -105,6 +106,8 @@ compliance-flag scan --file tests/fixtures/example-blog-post.html
 ```
 
 A sample report generated from that fixture is committed under [examples/reports/](examples/reports/) so you can inspect the output format without running a scan.
+
+The API key is a credential from Anthropic, not from Compliance Flag. Create one in the [Anthropic Console API keys page](https://platform.claude.com/settings/keys) after setting up an Anthropic API account. When a scan runs, the CLI sends the captured source content and bundled regulatory context to Anthropic's Opus model through this key so the model can draft the report findings. Anthropic API usage may be billed through the account that owns the key.
 
 ## Usage
 
@@ -130,7 +133,7 @@ Write output to a specific directory:
 compliance-flag scan --file page.html --out reports/example
 ```
 
-Override the Anthropic model (experimental — the package default is recommended; other models may produce reports that fail schema validation):
+Override the Opus model only when you have a specific reason to test another Anthropic model. The package default is `claude-opus-4-6`, and non-default models may produce reports that fail schema validation:
 
 ```bash
 compliance-flag scan --file page.html --model claude-sonnet-4-6
@@ -186,14 +189,14 @@ For an annotated end-to-end example, see [examples/reports/example-blog-post-rep
 
 | Variable | Purpose |
 | --- | --- |
-| `ANTHROPIC_API_KEY` | Required. Authenticates calls to the Anthropic API. |
+| `ANTHROPIC_API_KEY` | Required. Authenticates calls to the Anthropic API for Opus model analysis. |
 
 | Flag&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Default | Purpose |
 | --- | --- | --- |
 | `--file` | — | Local file path (`.html`, `.htm`, `.md`, `.txt`). Mutually exclusive with `--url`. |
 | `--url` | — | Authorized public URL to fetch and scan. Mutually exclusive with `--file`. |
 | `--out` | `reports` | Output directory for the four scan artifacts. |
-| `--model` | package default | Override the Anthropic model used for analysis. **Experimental** — non-default models may produce output that fails schema validation. |
+| `--model` | `claude-opus-4-6` | Override the Opus model used for analysis. **Experimental** — non-default Anthropic models may produce output that fails schema validation. |
 
 ## Exit Codes
 

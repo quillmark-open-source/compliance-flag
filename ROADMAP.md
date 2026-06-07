@@ -43,7 +43,7 @@ Planned plugin work:
 
 Status: planned
 
-Current URL scans send the captured HTML document to the model. This preserves
+Current URL scans send the captured HTML document to Anthropic's Opus model. This preserves
 context but can be expensive: the first successful beta URL scan captured about
 58k page tokens and produced about 105k billed input tokens after regulatory
 context and prompt assembly. Local `.htm` and `.html` files have the same issue

@@ -1,5 +1,7 @@
 # Usage
 
+Each scan sends captured content and bundled regulatory context to Anthropic's Opus model through the user's `ANTHROPIC_API_KEY`, then validates the model output against the bundled report schema.
+
 ## Local File
 
 ```bash
@@ -17,6 +19,16 @@ compliance-flag scan --url https://example.com
 URL mode is only for public pages you own, control, administer, or have explicit permission to assess. Do not run URL scans against third-party websites without authorization.
 
 URL mode captures the page content first, saves the raw source material, and analyzes that captured content.
+
+## Model
+
+The package default is `claude-opus-4-6`, Anthropic's Opus model. Use `--model` only when you have a specific reason to test another Anthropic model:
+
+```bash
+compliance-flag scan --file page.html --model anthropic-model-name
+```
+
+Model override is experimental. Non-default models may produce output that fails schema validation.
 
 ## Output
 

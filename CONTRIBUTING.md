@@ -17,7 +17,7 @@ pytest
 - Add or update tests when behavior changes.
 - Preserve review-support language. Do not describe findings as final legal or compliance determinations.
 - Treat regulatory source changes carefully. Include source URLs, retrieval dates, and notes in `docs/regulatory-sources.md`.
-- Do not commit generated reports, local evidence captures, API keys, or customer/private content.
+- Do not commit generated reports, local evidence captures, Anthropic API keys, or customer/private content.
 
 ## Pull Requests
 
