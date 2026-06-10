@@ -6,4 +6,4 @@ Compliance Flag reports, examples, prompts, documentation, and generated content
 
 Compliance Flag is intended only for authorized personnel reviewing websites, files, pages, or other content they own, control, administer, or have explicit permission to assess. Do not use Compliance Flag to scan third-party websites or content without authorization.
 
-Neither Quillmark LLC nor Compliance Flag can determine whether any communication meets all applicable requirements. Compliance Flag is not affiliated with, endorsed by, or acting on behalf of the SEC, OpenAI, Anthropic, or any other regulator or model provider. Regulatory and enforcement references are based on public sources and may not reflect later developments.
+Neither Quillmark LLC nor Compliance Flag can determine whether any communication meets all applicable requirements. Compliance Flag is not affiliated with, endorsed by, or acting on behalf of the SEC, OpenAI, Anthropic, or any other regulator or model provider. Regulatory and enforcement references are based on bundled source materials and may not reflect later developments.

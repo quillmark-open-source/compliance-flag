@@ -48,7 +48,7 @@
             "website": {
               "type": "string",
               "format": "uri",
-              "description": "Public website for the report generator."
+              "description": "Website for the report generator."
             }
           }
         },
@@ -148,7 +148,7 @@
             "website": {
               "type": "string",
               "format": "uri",
-              "description": "Public website for the product that generated the report."
+              "description": "Website for the product that generated the report."
             },
             "text": {
               "type": "string",

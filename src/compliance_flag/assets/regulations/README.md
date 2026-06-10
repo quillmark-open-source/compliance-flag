@@ -2,7 +2,7 @@
 
 This directory contains the bundled SEC regulatory source material used by Compliance Flag during scan-time prompt assembly.
 
-The bundled files are intended to support reviewer-facing analysis of public Registered Investment Adviser marketing content. Findings should be grounded in enforceable SEC rule text, not industry best practices, staff guidance, informal standards, or non-SEC rules.
+The bundled files are intended to support reviewer-facing analysis of Registered Investment Adviser marketing content. Findings should be grounded in enforceable SEC rule text, not industry best practices, staff guidance, informal standards, or non-SEC rules.
 
 ## Bundled Scan-Time Sources
 
@@ -14,6 +14,6 @@ The bundled files are intended to support reviewer-facing analysis of public Reg
 
 ## Publication Notes
 
-The SEC rule files were migrated from the alpha scanner. Before a public release, confirm authoritative source URLs, retrieval dates, redistribution terms, and whether each source should be bundled, linked, or fetched by a separate setup step.
+The SEC rule files were migrated from the alpha scanner. Before release, confirm authoritative source URLs, retrieval dates, redistribution terms, and whether each source should be bundled, linked, or fetched by a separate setup step.
 
 The bundled `sec-rule-275-206-4-1-investor-marketing.md` file is labeled by eCFR as up to date as of February 23, 2026.

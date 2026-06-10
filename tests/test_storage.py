@@ -2,7 +2,11 @@ import json
 from pathlib import Path
 
 from compliance_flag.input.file import SourceDocument
-from compliance_flag.reports.storage import save_source_artifacts, source_extension
+from compliance_flag.reports.storage import (
+    save_report,
+    save_source_artifacts,
+    source_extension,
+)
 
 
 def test_source_extension_uses_file_suffix():
@@ -16,7 +20,7 @@ def test_source_extension_uses_file_suffix():
     assert source_extension(document) == ".md"
 
 
-def test_source_extension_uses_web_content_type():
+def test_source_extension_neutralizes_web_html():
     document = SourceDocument(
         source_type="web",
         location="https://example.com/page",
@@ -24,12 +28,12 @@ def test_source_extension_uses_web_content_type():
         content="<html></html>",
     )
 
-    assert source_extension(document, "text/html; charset=utf-8") == ".html"
+    assert source_extension(document, "text/html; charset=utf-8") == ".html.txt"
     assert source_extension(document, "text/plain") == ".txt"
     assert source_extension(document, "application/activity+json") == ".json"
 
 
-def test_source_extension_defaults_web_to_html():
+def test_source_extension_defaults_web_to_neutralized_html():
     document = SourceDocument(
         source_type="web",
         location="https://example.com/page",
@@ -37,7 +41,23 @@ def test_source_extension_defaults_web_to_html():
         content="<html></html>",
     )
 
-    assert source_extension(document) == ".html"
+    assert source_extension(document) == ".html.txt"
+
+
+def test_save_report_avoids_overwriting_existing_reports(tmp_path: Path):
+    document = SourceDocument(
+        source_type="web",
+        location="https://example.com/page",
+        title="Example",
+        content="<html></html>",
+    )
+
+    first = save_report({"report": {}}, document, tmp_path)
+    second = save_report({"report": {}}, document, tmp_path)
+
+    assert first != second
+    assert first.is_file()
+    assert second.is_file()
 
 
 def test_save_source_artifacts_writes_raw_source_and_metadata(tmp_path: Path):
@@ -56,7 +76,7 @@ def test_save_source_artifacts_writes_raw_source_and_metadata(tmp_path: Path):
         status_code=200,
     )
 
-    assert paths.source == tmp_path / "scan-example-20260508-120000.source.html"
+    assert paths.source == tmp_path / "scan-example-20260508-120000.source.html.txt"
     assert paths.metadata == (
         tmp_path / "scan-example-20260508-120000.source-meta.json"
     )
@@ -69,4 +89,5 @@ def test_save_source_artifacts_writes_raw_source_and_metadata(tmp_path: Path):
     assert metadata["content_type"] == "text/html; charset=utf-8"
     assert metadata["media_type"] == "text/html"
     assert metadata["status_code"] == 200
-    assert metadata["saved_as"] == "scan-example-20260508-120000.source.html"
+    assert metadata["saved_as"] == "scan-example-20260508-120000.source.html.txt"
+    assert "untrusted" in metadata["warning"]

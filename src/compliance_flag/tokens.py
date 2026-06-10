@@ -1,12 +1,10 @@
 from __future__ import annotations
 
 
-def count_tokens(text: str) -> tuple[int, str]:
-    """Count tokens with tiktoken when available, otherwise estimate."""
-    try:
-        import tiktoken
+def estimate_tokens(text: str) -> int:
+    """Roughly estimate the token count of text (~4 characters per token).
 
-        encoding = tiktoken.get_encoding("cl100k_base")
-        return len(encoding.encode(text)), "tiktoken"
-    except ImportError:
-        return max(len(text) // 4, 1) if text else 0, "estimated"
+    Exact usage is reported from the API response after each scan; this
+    estimate only sizes prompts before sending.
+    """
+    return max(len(text) // 4, 1) if text else 0

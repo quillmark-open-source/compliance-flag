@@ -16,7 +16,7 @@ REPORT_DISCLAIMER = {
         "not final determinations that any communication violates or satisfies "
         "applicable requirements. Compliance Flag is not affiliated with, endorsed "
         "by, or acting on behalf of the SEC or any other regulator. Regulatory "
-        "references are based on bundled/public source materials and may not "
+        "references are based on bundled source materials and may not "
         "reflect later developments."
     ),
 }

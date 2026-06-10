@@ -10,7 +10,7 @@ If the content is limited or appears incomplete, report what you can and note an
 
 ## Important context
 
-- **SEC Marketing Rule scope:** The Marketing Rule applies to any "advertisement" - any direct or indirect communication to more than one person that offers or promotes investment advisory services, or any communication that includes endorsements or testimonials. Most public RIA marketing pages may qualify.
+- **SEC Marketing Rule scope:** The Marketing Rule applies to any "advertisement" - any direct or indirect communication to more than one person that offers or promotes investment advisory services, or any communication that includes endorsements or testimonials. Many RIA marketing pages may qualify.
 - **Be thorough:** Evaluate the content against every checkpoint below. Do not stop after finding a few issues.
 - **Calibration:** Report only what you genuinely find. A clean piece of content should produce few findings. Do not inflate the finding count to hit a target.
 - **One finding per compliance concern:** When the same content triggers multiple SEC rule sections, report it as a single finding. Use the most specific or highest-severity SEC rule as the primary `rule` citation. List other applicable SEC rules in `related_rules`.
@@ -25,7 +25,7 @@ Follow this two-phase process in your thinking.
 
 **Phase 2 - Write findings:** Convert the Phase 1 concerns into formal JSON findings. You may adjust severity downward for mitigating factors, but do not drop a concern solely because it is borderline.
 
-Before finalizing, verify that the summary counts match the actual findings array.
+Before finalizing, verify that every Phase 1 concern is represented in the findings array.
 
 ## SEC compliance checkpoints
 
@@ -117,12 +117,10 @@ Return ONLY a valid JSON object conforming to the schema below. Do not include a
 
 For the report metadata:
 - `report.id` - generate a UUID
-- `report.generated_at` - use the current timestamp in ISO 8601 format
-- `report.scanner_version` - use "1.0.0"
 - `report.firm.name` - extract the firm name from the content, using visible branding or headings; if unclear, use the filename
-- `report.scan.source` - set type to "file", location to the filename provided by the user, and page_title to the content title or heading if available
-- `report.summary` - compute totals from the findings array. `by_severity` must include `critical`, `high`, `medium`, and `low` even when counts are zero.
 - `report.executive_summary` - write 2-3 concise paragraphs for a Chief Compliance Officer. Focus on the content reviewed, overall risk level, recurring themes, and highest-impact remediation priorities.
+
+Scan metadata, timestamps, version metadata, the disclaimer, and summary counts are added by the scanner after you respond; do not include fields outside the schema.
 
 For each finding, include:
 - A UUID

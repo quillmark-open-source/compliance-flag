@@ -1,6 +1,6 @@
 # Regulatory Sources
 
-The beta package currently includes regulatory source files migrated from the alpha scanner. Before the first public release, each bundled source should be checked for:
+The beta package currently includes regulatory source files migrated from the alpha scanner. Before the first release, each bundled source should be checked for:
 
 - authoritative source URL
 - retrieval date

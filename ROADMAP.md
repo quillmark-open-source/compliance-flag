@@ -6,11 +6,11 @@ should improve reliability, cost, reviewer trust, and release readiness.
 
 ## Release Track
 
-### v0.1.0 - Initial public alpha
+### v0.1.0 - Initial alpha
 
 Status: current
 
-The first public release is a CLI preview for early testing and feedback. It
+The first release is a CLI preview for early testing and feedback. It
 establishes the package structure, SEC-focused scan flow, report schema, HTML
 rendering, source artifact preservation, example report, and baseline project
 documentation.
@@ -65,7 +65,7 @@ Goal: materially reduce token usage and scan time while keeping the audit trail 
 - Port the alpha URL safety gate into the package URL input flow.
 - Add mocked provider tests for the full scan pipeline.
 - Add a stable report schema version and migration notes.
-- Document regulatory source provenance before public release.
+- Document regulatory source provenance before release.
 - Save a webpage screenshot artifact during URL scans so reviewers can compare the rendered page with captured source and extracted text.
 - Add an OpenAI model provider alongside the current Anthropic provider.
 - Support `.docx` and `.pdf` source files with reliable text extraction and source artifact preservation.

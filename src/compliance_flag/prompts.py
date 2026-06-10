@@ -5,10 +5,11 @@ import string
 from dataclasses import dataclass
 from datetime import datetime, timezone
 
+from compliance_flag.console import log
 from compliance_flag.reports.schema import model_output_schema_json
 from compliance_flag.resources import read_text_asset
 from compliance_flag.rules import load_rules
-from compliance_flag.tokens import count_tokens
+from compliance_flag.tokens import estimate_tokens
 
 
 @dataclass(frozen=True)
@@ -61,12 +62,13 @@ def build_prompts(
         content_json=_json_string(content),
     )
 
-    system_tokens, method = count_tokens(system)
-    user_tokens, _ = count_tokens(user)
-    label = "~" if method == "estimated" else ""
-    print(f"  prompt tokens ({method}):")
-    print(f"    system: {label}{system_tokens:,}")
-    print(f"    user:   {label}{user_tokens:,}")
-    print(f"    total:  {label}{system_tokens + user_tokens:,}")
+    system_tokens = estimate_tokens(system)
+    user_tokens = estimate_tokens(user)
+    log(
+        "prompt tokens (estimated): "
+        f"system ~{system_tokens:,}, "
+        f"user ~{user_tokens:,}, "
+        f"total ~{system_tokens + user_tokens:,}"
+    )
 
     return PromptPair(system=system, user=user)

@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from compliance_flag.logging import log
+from compliance_flag.console import log
 from compliance_flag.resources import read_text_asset
-from compliance_flag.tokens import count_tokens
+from compliance_flag.tokens import estimate_tokens
 
 
 @dataclass(frozen=True)
@@ -32,8 +32,7 @@ def load_rules() -> str:
     sections: list[str] = []
     for source in RULE_SOURCES:
         content = read_text_asset("regulations", source.filename)
-        tokens, _ = count_tokens(content)
-        log(f"  loaded {source.filename} ({tokens:,} tokens)")
+        log(f"  loaded {source.filename} (~{estimate_tokens(content):,} tokens)")
         sections.append(
             f"### BEGIN: {source.label}\n\n{content}\n\n### END: {source.label}"
         )

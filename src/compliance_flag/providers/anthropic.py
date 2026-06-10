@@ -6,9 +6,9 @@ from dataclasses import dataclass
 
 import httpx
 
-from compliance_flag.logging import log
+from compliance_flag.console import log
 
-DEFAULT_MODEL = "claude-opus-4-6"
+DEFAULT_MODEL = "claude-opus-4-8"
 
 
 @dataclass(frozen=True)
@@ -27,17 +27,35 @@ class ModelResponse:
 class AnthropicProvider:
     """Anthropic Messages API provider."""
 
-    def __init__(self, *, model: str = DEFAULT_MODEL, max_tokens: int = 32000):
+    def __init__(self, *, model: str = DEFAULT_MODEL, max_tokens: int = 64000):
         if not os.environ.get("ANTHROPIC_API_KEY"):
             raise RuntimeError("ANTHROPIC_API_KEY environment variable is not set")
         self.model = model
         self.max_tokens = max_tokens
 
-    def complete(self, *, system: str, user: str) -> ModelResponse:
+    def complete(
+        self,
+        *,
+        system: str,
+        user: str,
+        output_schema: dict | None = None,
+    ) -> ModelResponse:
         try:
             import anthropic
         except ImportError as exc:
             raise RuntimeError("anthropic package is not installed") from exc
+
+        request: dict = {
+            "model": self.model,
+            "max_tokens": self.max_tokens,
+            "system": system,
+            "messages": [{"role": "user", "content": user}],
+            "thinking": {"type": "adaptive"},
+        }
+        if output_schema is not None:
+            request["output_config"] = {
+                "format": {"type": "json_schema", "schema": output_schema}
+            }
 
         client = anthropic.Anthropic()
         max_retries = 3
@@ -46,12 +64,7 @@ class AnthropicProvider:
             try:
                 log(f"model: {self.model}")
                 log("sending streaming request to Anthropic API")
-                with client.messages.stream(
-                    model=self.model,
-                    max_tokens=self.max_tokens,
-                    system=system,
-                    messages=[{"role": "user", "content": user}],
-                ) as stream:
+                with client.messages.stream(**request) as stream:
                     for event in stream:
                         self._log_stream_event(event)
                     response = stream.get_final_message()
@@ -61,7 +74,7 @@ class AnthropicProvider:
                 text_parts = [
                     block.text
                     for block in response.content
-                    if hasattr(block, "text") and block.text is not None
+                    if block.type == "text" and block.text
                 ]
                 usage = ModelUsage(
                     input_tokens=response.usage.input_tokens,
@@ -72,11 +85,20 @@ class AnthropicProvider:
                     usage=usage,
                     stop_reason=response.stop_reason,
                 )
-            except (httpx.RemoteProtocolError, httpx.ReadError) as exc:
+            except httpx.TransportError as exc:
                 if attempt == max_retries:
                     raise
                 wait = 5 * attempt
                 log(f"connection lost: {exc}")
+                log(f"retrying in {wait}s (attempt {attempt + 1}/{max_retries})")
+                time.sleep(wait)
+            except anthropic.APIStatusError as exc:
+                # Mid-stream error events (e.g. overloaded) arrive as status
+                # errors after the SDK's own pre-stream retries are exhausted.
+                if attempt == max_retries or exc.status_code < 500:
+                    raise
+                wait = 5 * attempt
+                log(f"API error {exc.status_code}: {exc}")
                 log(f"retrying in {wait}s (attempt {attempt + 1}/{max_retries})")
                 time.sleep(wait)
 

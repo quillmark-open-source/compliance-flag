@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "compliance-flag"
-version = "0.1.1"
+dynamic = ["version"]
 description = "AI-assisted Python CLI for drafting SEC Marketing Rule review reports with Anthropic's Opus model."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -26,28 +26,30 @@ classifiers = [
   "Development Status :: 3 - Alpha",
   "Environment :: Console",
   "Intended Audience :: Financial and Insurance Industry",
-  "License :: OSI Approved :: Apache Software License",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Office/Business :: Financial",
   "Topic :: Text Processing :: Markup :: HTML"
 ]
 dependencies = [
-  "anthropic>=0.66.0",
+  "anthropic>=0.77.0",
   "beautifulsoup4>=4.12.0",
   "httpx>=0.27.0",
-  "jsonschema>=4.22.0"
+  "idna>=3.0",
+  "jsonschema[format-nongpl]>=4.22.0"
 ]
 
 [project.optional-dependencies]
 dev = [
   "build>=1.2.0",
+  "mypy>=1.11.0",
   "pytest>=8.0.0",
   "ruff>=0.8.0",
-  "tiktoken>=0.7.0"
+  "twine>=5.1.0"
 ]
 
 [project.scripts]
@@ -58,6 +60,9 @@ Homepage = "https://complianceflag.com/"
 Documentation = "https://complianceflag.com/docs/"
 Issues = "https://github.com/quillmark-open-source/compliance-flag/issues"
 Source = "https://github.com/quillmark-open-source/compliance-flag"
+
+[tool.hatch.version]
+path = "src/compliance_flag/__init__.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/compliance_flag"]
@@ -93,4 +98,7 @@ line-length = 88
 target-version = "py310"
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B"]
+select = ["E", "F", "I", "UP", "B", "A"]
+
+[tool.mypy]
+ignore_missing_imports = true

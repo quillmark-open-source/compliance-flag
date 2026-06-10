@@ -2,24 +2,29 @@ import socket
 
 import pytest
 
-from compliance_flag.input.url import validate_public_url
+from compliance_flag.input.url import resolve_url_addresses
 
 
-def private_resolver(host, port, type=socket.SOCK_STREAM):
+def internal_resolver(host, port, **kwargs):
     assert host == "example.com"
     return [(socket.AF_INET, socket.SOCK_STREAM, 6, "", ("10.0.0.10", port or 80))]
 
 
-def test_validate_public_url_rejects_private_ip_literal():
-    with pytest.raises(ValueError, match="non-public"):
-        validate_public_url("http://127.0.0.1/private")
+def test_resolve_url_addresses_allows_loopback_ip_literal():
+    addresses = resolve_url_addresses("http://127.0.0.1/page")
+
+    assert "127.0.0.1" in addresses
 
 
-def test_validate_public_url_rejects_localhost():
-    with pytest.raises(ValueError, match="not public"):
-        validate_public_url("http://localhost/private")
+def test_resolve_url_addresses_allows_internal_dns_result():
+    addresses = resolve_url_addresses(
+        "http://example.com/private",
+        resolver=internal_resolver,
+    )
+
+    assert addresses == ["10.0.0.10"]
 
 
-def test_validate_public_url_rejects_private_dns_result():
-    with pytest.raises(ValueError, match="non-public"):
-        validate_public_url("http://example.com/private", resolver=private_resolver)
+def test_resolve_url_addresses_rejects_non_http_scheme():
+    with pytest.raises(ValueError, match="invalid URL"):
+        resolve_url_addresses("file:///etc/passwd")

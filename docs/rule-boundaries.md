@@ -8,4 +8,4 @@ The initial rule focus is SEC Rule 275.206(4)-1. Related SEC books-and-records a
 
 Reports should avoid implying that a finding is a final legal, compliance, or regulatory conclusion.
 
-Do not put private client content, Anthropic API keys, credentials, or confidential regulatory information in public issues, examples, or pull requests.
+Do not put private client content, Anthropic API keys, credentials, or confidential regulatory information in GitHub issues, examples, or pull requests.

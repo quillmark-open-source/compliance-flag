@@ -5,28 +5,39 @@ import re
 
 
 def extract_json(text: str) -> dict:
-    """Extract a JSON object from raw model text."""
+    """Extract a JSON object from raw model text.
+
+    Structured outputs make the whole response valid JSON in the normal case;
+    the fallbacks recover objects wrapped in code fences or prose.
+    """
     try:
-        return json.loads(text)
+        value = json.loads(text)
     except json.JSONDecodeError:
         pass
+    else:
+        if isinstance(value, dict):
+            return value
+        raise ValueError("model response was JSON but not a report object")
 
     match = re.search(r"```(?:json)?\s*\n(.*?)\n```", text, re.DOTALL)
     if match:
         try:
-            return json.loads(match.group(1))
+            value = json.loads(match.group(1))
+            if isinstance(value, dict):
+                return value
         except json.JSONDecodeError:
             pass
 
-    brace_start = text.find("{")
-    if brace_start != -1:
-        depth = 0
-        for index in range(brace_start, len(text)):
-            if text[index] == "{":
-                depth += 1
-            elif text[index] == "}":
-                depth -= 1
-                if depth == 0:
-                    return json.loads(text[brace_start : index + 1])
+    decoder = json.JSONDecoder()
+    start = text.find("{")
+    while start != -1:
+        try:
+            value, _ = decoder.raw_decode(text, start)
+        except json.JSONDecodeError:
+            pass
+        else:
+            if isinstance(value, dict):
+                return value
+        start = text.find("{", start + 1)
 
     raise ValueError("could not extract valid JSON from response")

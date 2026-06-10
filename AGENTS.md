@@ -5,7 +5,7 @@ Guidance for coding agents working in this repository.
 ## Project Context
 
 Compliance Flag is an open-source Python CLI for generating reviewer-ready
-reports that flag potential SEC Marketing Rule issues in public URLs and local
+reports that flag potential SEC Marketing Rule issues in URLs and local
 content files.
 
 The project is moving from an alpha scanner toward a beta-quality package. Treat
@@ -88,9 +88,9 @@ provider, prompt, URL capture, or report output behavior.
   Co-authored-by: Codex <noreply@openai.com>
   ```
 
-- The maintainer intends to make the first public commit. Leave staging and
+- The maintainer intends to make the first release commit. Leave staging and
   committing to them unless asked otherwise.
-- Before a public-ready commit, run a hygiene sweep for prohibited/out-of-scope
+- Before a release-ready commit, run a hygiene sweep for prohibited/out-of-scope
   references, secrets, generated reports, and ignored legacy material.
 
 Useful checks:

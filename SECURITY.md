@@ -6,9 +6,9 @@ Compliance Flag is pre-1.0. Security fixes are applied to the active development
 
 ## Reporting a Vulnerability
 
-Please do not open public issues for suspected vulnerabilities.
+Please do not open GitHub issues for suspected vulnerabilities.
 
-Report security concerns to the maintainers using the private contact channel listed for the Quillmark Open Source organization, or by contacting Quillmark LLC through its public website.
+Report security concerns to the maintainers using the private contact channel listed for the Quillmark Open Source organization, or by contacting Quillmark LLC through its website.
 
 Include:
 
@@ -19,4 +19,4 @@ Include:
 
 ## Scanner Safety Notes
 
-Compliance Flag is designed for public marketing pages and local files supplied by the user. It should not be used to crawl private networks, authenticated applications, customer portals, or confidential systems without explicit authorization.
+Compliance Flag is designed for marketing pages and local files supplied by the user. It should not be used to crawl third-party websites, authenticated applications, customer portals, or confidential systems without explicit authorization.

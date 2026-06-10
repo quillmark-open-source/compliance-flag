@@ -7,7 +7,7 @@
 [![Ruff](https://img.shields.io/badge/ruff-enabled-46a146.svg)](https://docs.astral.sh/ruff/)
 [![Status: alpha](https://img.shields.io/badge/status-alpha-orange.svg)](ROADMAP.md)
 
-**Compliance Flag** is an AI-assisted Python CLI that prepares reviewer-ready reports on public URLs and local content files a team is authorized to review. It captures the source material, sends the review request to Anthropic's Opus model through the user's Anthropic API key, compares Registered Investment Adviser (RIA) marketing content against bundled SEC regulatory sources, and produces structured findings for qualified compliance, legal, or supervisory review.
+**Compliance Flag** is an AI-assisted Python CLI that prepares reviewer-ready reports on URLs and local content files a team is authorized to review. It captures the source material, sends the review request to Anthropic's Opus model through the user's Anthropic API key, compares Registered Investment Adviser (RIA) marketing content against bundled SEC regulatory sources, and produces structured findings for qualified compliance, legal, or supervisory review.
 
 The analysis is performed by Anthropic's Opus model, so each report is **structured review support, not a substitute for professional judgment**. See [Intended Use](#intended-use) and [DISCLAIMER.md](DISCLAIMER.md).
 
@@ -41,7 +41,7 @@ The analysis is performed by Anthropic's Opus model, so each report is **structu
 
 ## Website
 
-The project website is [complianceflag.com](https://complianceflag.com/). It provides a plain-language overview for compliance reviewers and technical operators, website-hosted docs, and a public sample report:
+The project website is [complianceflag.com](https://complianceflag.com/). It provides a plain-language overview for compliance reviewers and technical operators, website-hosted docs, and a sample report:
 
 - [Website documentation](https://complianceflag.com/docs/)
 - [Sample report](https://complianceflag.com/sample-home-page-audit/)
@@ -74,7 +74,7 @@ The source material is always preserved alongside the report so a reviewer can v
 
 ## Requirements
 
-- Python **3.10+** (CPython 3.10, 3.11, 3.12, 3.13 are tested)
+- Python **3.10+** (CPython 3.10, 3.11, 3.12, 3.13, 3.14 are tested)
 - An [Anthropic API key](https://platform.claude.com/settings/keys) for Opus model calls
 - Network access for `--url` scans and for model calls
 
@@ -127,13 +127,15 @@ Scan a URL you are authorized to review:
 compliance-flag scan --url https://example.com
 ```
 
+Authorized URL scans can include intranet, localhost, or firewall-restricted resources when the scanner is run in an environment allowed to reach them.
+
 Write output to a specific directory:
 
 ```bash
 compliance-flag scan --file page.html --out reports/example
 ```
 
-Override the Opus model only when you have a specific reason to test another Anthropic model. The package default is `claude-opus-4-6`, and non-default models may produce reports that fail schema validation:
+Override the Opus model only when you have a specific reason to test another Anthropic model. The package default is `claude-opus-4-8`, and non-default models may produce reports that fail schema validation:
 
 ```bash
 compliance-flag scan --file page.html --model claude-sonnet-4-6
@@ -159,7 +161,7 @@ Each scan writes four artifacts to the output directory (default `reports/`):
 | `scan-*.source.<ext>` | Raw captured source exactly as analyzed |
 | `scan-*.source-meta.json` | Capture metadata (source URL, content type, status code, saved filename) |
 
-Local file scans preserve the input file extension. URL scans choose the source extension from a conservative `Content-Type` allowlist (`text/html` → `.html`, `text/plain` → `.txt`, `text/markdown` → `.md`, JSON/XML media types → `.json`/`.xml`); unknown types default to `.html`.
+Local file scans preserve the input file extension. URL scans choose the source extension from a conservative `Content-Type` allowlist (`text/plain` → `.txt`, `text/markdown` → `.md`, JSON/XML media types → `.json`/`.xml`). HTML captures and unknown types are saved as `.html.txt` so the untrusted page is not opened directly as HTML by a double-click.
 
 ## Reading a Report
 
@@ -194,9 +196,9 @@ For an annotated end-to-end example, see [examples/reports/example-blog-post-rep
 | Flag&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Default | Purpose |
 | --- | --- | --- |
 | `--file` | — | Local file path (`.html`, `.htm`, `.md`, `.txt`). Mutually exclusive with `--url`. |
-| `--url` | — | Authorized public URL to fetch and scan. Mutually exclusive with `--file`. |
+| `--url` | — | Authorized URL to fetch and scan. Mutually exclusive with `--file`. |
 | `--out` | `reports` | Output directory for the four scan artifacts. |
-| `--model` | `claude-opus-4-6` | Override the Opus model used for analysis. **Experimental** — non-default Anthropic models may produce output that fails schema validation. |
+| `--model` | `claude-opus-4-8` | Override the Opus model used for analysis. **Experimental** — the override must support adaptive thinking and structured outputs (Opus 4.6+, Sonnet 4.6, Fable 5); older models are rejected by the API, and non-default models may produce output that fails schema validation. |
 
 ## Exit Codes
 
@@ -253,7 +255,7 @@ Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [C
 
 ## Security
 
-Do not file security issues in the public tracker. Report vulnerabilities per [SECURITY.md](SECURITY.md).
+Do not file security issues in the issue tracker. Report vulnerabilities per [SECURITY.md](SECURITY.md).
 
 ## Maintainer
 

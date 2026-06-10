@@ -5,9 +5,9 @@ import sys
 from pathlib import Path
 
 from compliance_flag import __version__
+from compliance_flag.console import log
 from compliance_flag.input.file import load_file
 from compliance_flag.input.url import fetch_url
-from compliance_flag.logging import log
 from compliance_flag.providers.anthropic import DEFAULT_MODEL
 from compliance_flag.reports.render_html import save_html_report
 from compliance_flag.reports.storage import save_report, save_source_artifacts
@@ -29,7 +29,7 @@ def build_parser() -> argparse.ArgumentParser:
     scan = subparsers.add_parser("scan", help="scan a URL or local file")
     source = scan.add_mutually_exclusive_group(required=True)
     source.add_argument("--file", help="local .html, .htm, .md, or .txt file")
-    source.add_argument("--url", help="authorized public URL to fetch and scan")
+    source.add_argument("--url", help="authorized URL to fetch and scan")
     scan.add_argument("--out", default="reports", help="output directory")
     scan.add_argument("--model", help=f"Opus model override (default: {DEFAULT_MODEL})")
     scan.set_defaults(func=run_scan)
@@ -43,7 +43,7 @@ def run_scan(args: argparse.Namespace) -> int:
         log("compliance flag scan starting")
         print()
 
-        if args.file:
+        if args.file is not None:
             document = load_file(args.file)
             content_type = None
             status_code = None
@@ -69,7 +69,6 @@ def run_scan(args: argparse.Namespace) -> int:
         log(f"html: {html_path}")
         log(f"source: {source_paths.source}")
         log(f"source metadata: {source_paths.metadata}")
-        log("schema: valid")
         log(f"findings: {len(findings)}")
         log(
             "usage: "

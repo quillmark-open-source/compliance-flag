@@ -9,4 +9,4 @@ Use GitHub issues for:
 - feature requests
 - scanner/report schema discussions
 
-Do not include private client content, non-public firm materials, Anthropic API keys, or confidential regulatory information in public issues.
+Do not include private client content, confidential firm materials, Anthropic API keys, or confidential regulatory information in GitHub issues.

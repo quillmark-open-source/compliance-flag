@@ -39,7 +39,12 @@ def output_basename(document: SourceDocument) -> str:
 
 def save_report(report: dict, document: SourceDocument, out_dir: Path) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
-    path = out_dir / f"{output_basename(document)}.json"
+    basename = output_basename(document)
+    path = out_dir / f"{basename}.json"
+    counter = 1
+    while path.exists():
+        path = out_dir / f"{basename}-{counter}.json"
+        counter += 1
     path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
     return path
 
@@ -68,7 +73,12 @@ def source_extension(document: SourceDocument, content_type: str | None = None) 
         suffix = Path(document.location).suffix.lower()
         return suffix or ".txt"
 
-    return _extension_from_content_type(content_type) or ".html"
+    extension = _extension_from_content_type(content_type) or ".html"
+    if extension == ".html":
+        # Captured web pages are untrusted; the .txt suffix prevents a
+        # double-click from executing the page's scripts locally.
+        return ".html.txt"
+    return extension
 
 
 def save_source_artifacts(
@@ -97,6 +107,9 @@ def save_source_artifacts(
     if document.source_type == "web":
         metadata["final_url"] = document.location
         metadata["media_type"] = _media_type(content_type)
+        metadata["warning"] = (
+            "raw untrusted capture of a remote page; do not open as HTML"
+        )
 
     metadata_path.write_text(
         json.dumps(metadata, indent=2, ensure_ascii=False),

@@ -7,22 +7,72 @@ import jsonschema
 
 from compliance_flag.resources import read_text_asset
 
+# Fields stamped or recalculated by the scanner after the model responds.
+# They are removed from the schema the model fills in via structured outputs.
+HARDCODED_REPORT_FIELDS = [
+    "disclaimer",
+    "generator",
+    "generated_at",
+    "scanner_version",
+    "summary",
+    "scan",
+]
+
+# JSON Schema keywords the structured-outputs API does not accept. They are
+# stripped from the model-facing schema and still enforced client-side by
+# validate_report against the full schema.
+_UNSUPPORTED_OUTPUT_KEYWORDS = {
+    "pattern",
+    "minimum",
+    "maximum",
+    "multipleOf",
+    "minLength",
+    "maxLength",
+    "minItems",
+    "maxItems",
+}
+
 
 def load_schema() -> dict:
     return json.loads(read_text_asset("schemas", "report-schema.json"))
 
 
+def _strip_unsupported_keywords(node: object, *, is_name_map: bool = False) -> None:
+    """Strip unsupported keywords from schema nodes.
+
+    Dicts under ``properties``/``$defs`` map names to schemas; their keys are
+    names, not keywords, so nothing is popped from them directly.
+    """
+    if isinstance(node, dict):
+        if not is_name_map:
+            for keyword in _UNSUPPORTED_OUTPUT_KEYWORDS:
+                node.pop(keyword, None)
+        for key, value in node.items():
+            _strip_unsupported_keywords(
+                value,
+                is_name_map=not is_name_map and key in {"properties", "$defs"},
+            )
+    elif isinstance(node, list):
+        for item in node:
+            _strip_unsupported_keywords(item)
+
+
 def load_model_output_schema() -> dict:
-    """Load the schema shown to the model before hardcoded fields are added."""
+    """Load the schema the model fills in via structured outputs.
+
+    Fields the scanner stamps afterward are removed, as are schema keywords
+    the structured-outputs API rejects (those remain enforced client-side).
+    """
     schema = copy.deepcopy(load_schema())
     report_schema = schema["properties"]["report"]
-    for hardcoded_field in ["disclaimer", "generator"]:
+    for hardcoded_field in HARDCODED_REPORT_FIELDS:
         report_schema["properties"].pop(hardcoded_field, None)
     report_schema["required"] = [
         field
         for field in report_schema["required"]
-        if field not in {"disclaimer", "generator"}
+        if field not in HARDCODED_REPORT_FIELDS
     ]
+    _strip_unsupported_keywords(schema)
     return schema
 
 
@@ -38,49 +88,26 @@ def validate_report(report: dict) -> None:
     validator.validate(report)
 
 
-def repair_report_shape(report: dict) -> None:
-    """Fill deterministic report fields that models may occasionally omit."""
-    if (
-        isinstance(report.get("report"), dict)
-        and isinstance(report.get("findings"), list)
-    ):
-        body = report["report"]
-        if not body.get("findings"):
-            body["findings"] = report["findings"]
-        report.pop("findings", None)
+def backfill_stripped_constraints(report: dict) -> None:
+    """Repair the few constraints structured outputs cannot enforce.
 
+    ``minItems: 1`` on remediation steps is stripped from the model-facing
+    schema, so an empty steps array would otherwise fail validation only
+    after the API call has been paid for.
+    """
     body = report.get("report", report)
-    for finding in body.get("findings", []):
-        rule = finding.get("rule")
-        if not isinstance(rule, dict):
+    findings = body.get("findings", [])
+    for finding in findings:
+        if not isinstance(finding, dict):
             continue
-        if not rule.get("description"):
-            citation = rule.get("citation", "the cited rule")
-            rule_name = rule.get("rule_name", "the cited requirement")
-            rule["description"] = (
-                f"Potential concern under {citation} ({rule_name})."
-            )
-        violation = finding.get("violation")
-        if not isinstance(violation, dict):
-            continue
-        remediation = violation.get("remediation")
-        if isinstance(remediation, str):
-            violation["remediation"] = {
-                "summary": "Review and remediate the issue identified in this finding.",
-                "steps": [remediation],
-            }
-        elif isinstance(remediation, dict):
-            steps = remediation.get("steps")
-            if isinstance(steps, str):
-                remediation["steps"] = [steps]
-            if not remediation.get("summary"):
-                remediation["summary"] = (
-                    "Review and remediate the issue identified in this finding."
-                )
-            if not remediation.get("steps"):
-                remediation["steps"] = [
-                    "Update the content to address the potential compliance concern."
-                ]
+        remediation = finding.get("violation", {}).get("remediation")
+        if isinstance(remediation, dict) and remediation.get("steps") == []:
+            remediation["steps"] = [
+                "Update the content to address the potential compliance concern."
+            ]
+
+
+KNOWN_SEVERITIES = ("critical", "high", "medium", "low")
 
 
 def fix_summary(report: dict) -> None:
@@ -88,12 +115,15 @@ def fix_summary(report: dict) -> None:
     body = report.get("report", report)
     findings = body.get("findings", [])
 
-    by_severity: dict[str, int] = {"critical": 0, "high": 0, "medium": 0, "low": 0}
+    by_severity: dict[str, int] = dict.fromkeys(KNOWN_SEVERITIES, 0)
     by_category: dict[str, int] = {}
 
     for finding in findings:
-        severity = finding.get("severity", "unknown")
-        by_severity[severity] = by_severity.get(severity, 0) + 1
+        if not isinstance(finding, dict):
+            continue
+        severity = finding.get("severity")
+        if severity in by_severity:
+            by_severity[severity] += 1
 
         category = finding.get("category", "unknown")
         by_category[category] = by_category.get(category, 0) + 1

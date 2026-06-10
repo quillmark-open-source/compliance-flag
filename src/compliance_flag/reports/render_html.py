@@ -51,8 +51,7 @@ def _render_remediation(remediation: object) -> str:
         )
 
     return (
-        "".join(parts)
-        or '<p class="empty">No recommended changes were provided.</p>'
+        "".join(parts) or '<p class="empty">No recommended changes were provided.</p>'
     )
 
 
@@ -119,7 +118,7 @@ def render_html(report_document: dict) -> str:
         findings_html = '<p class="empty">No potential findings were reported.</p>'
 
     badges = "\n".join(
-        f'<span class="summary-badge">{level}: {by_severity.get(level, 0)}</span>'
+        f'<span class="summary-badge">{level}: {_esc(by_severity.get(level, 0))}</span>'
         for level in ["critical", "high", "medium", "low"]
     )
     executive_summary = "".join(
