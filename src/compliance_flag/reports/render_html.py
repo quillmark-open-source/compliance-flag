@@ -41,17 +41,17 @@ def _render_remediation(remediation: object) -> str:
     if isinstance(steps, str):
         steps = [steps]
     if steps:
-        items = "".join(f"<li>{_esc(step)}</li>" for step in steps)
-        parts.append(f"<ol>{items}</ol>")
+        items = "\n".join(f"  <li>{_esc(step)}</li>" for step in steps)
+        parts.append(f"<ol>\n{items}\n</ol>")
 
     if suggested_language:
         parts.append(
-            "<h5>Suggested Language</h5>"
+            "<h5>Suggested Language</h5>\n"
             f"<blockquote>{_esc(suggested_language)}</blockquote>"
         )
 
     return (
-        "".join(parts) or '<p class="empty">No recommended changes were provided.</p>'
+        "\n".join(parts) or '<p class="empty">No recommended changes were provided.</p>'
     )
 
 
@@ -64,30 +64,33 @@ def _render_finding(finding: dict, index: int) -> str:
     related = finding.get("related_rules", [])
     related_html = ""
     if related:
-        items = "".join(
-            f"<li>{_esc(item.get('authority'))} {_esc(item.get('citation'))}"
+        items = "\n".join(
+            f"    <li>{_esc(item.get('authority'))} {_esc(item.get('citation'))}"
             f" {_esc(item.get('rule_name', ''))}</li>"
             for item in related
         )
-        related_html = f"<h4>Related Rules</h4><ul>{items}</ul>"
+        related_html = f"""  <h4>Related Rules</h4>
+  <ul>
+{items}
+  </ul>
+"""
 
     context_html = ""
     if content.get("context"):
         context_html = (
-            f"<p><strong>Context:</strong> {_esc(content.get('context'))}</p>"
+            f"  <p><strong>Context:</strong> {_esc(content.get('context'))}</p>\n"
         )
 
-    return f"""
-<section class="finding" style="border-left-color: {color}">
+    return f"""<section class="finding" style="border-left-color: {color}">
   <div class="finding-head">
     <span class="badge" style="background: {color}">{_esc(severity).title()}</span>
     <span class="finding-number">#{index}</span>
   </div>
   <h3>{_esc(rule.get("citation"))} - {_esc(rule.get("rule_name"))}</h3>
   <p class="rule-description">{_esc(rule.get("description"))}</p>
-  {related_html}
+{related_html}\
   <blockquote>{_esc(content.get("excerpt"))}</blockquote>
-  {context_html}
+{context_html}\
   <h4>Issue</h4>
   <p>{_esc(violation.get("explanation"))}</p>
   <h4>Recommended Changes</h4>
@@ -121,7 +124,7 @@ def render_html(report_document: dict) -> str:
         f'<span class="summary-badge">{level}: {_esc(by_severity.get(level, 0))}</span>'
         for level in ["critical", "high", "medium", "low"]
     )
-    executive_summary = "".join(
+    executive_summary = "\n".join(
         f"<p>{_esc(paragraph.strip())}</p>"
         for paragraph in str(report.get("executive_summary", "")).split("\n")
         if paragraph.strip()
@@ -250,7 +253,7 @@ def render_html(report_document: dict) -> str:
     {executive_summary or '<p class="empty">No executive summary was provided.</p>'}
   </section>
   <h2>Findings</h2>
-  {findings_html}
+{findings_html}
   <footer class="report-disclaimer">
     <p>{_esc(disclaimer.get("text"))}</p>
     <p>

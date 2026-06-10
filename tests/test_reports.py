@@ -233,7 +233,7 @@ def test_render_html_formats_structured_remediation_as_numbered_list():
                         "low": 0,
                     },
                 },
-                "executive_summary": "One finding.",
+                "executive_summary": "One finding.\nSecond paragraph.",
                 "disclaimer": REPORT_DISCLAIMER,
                 "findings": [
                     {
@@ -265,8 +265,11 @@ def test_render_html_formats_structured_remediation_as_numbered_list():
     )
 
     assert "<h4>Recommended Changes</h4>" in html
-    assert "<ol><li>Gather support for the statement.</li>" in html
-    assert "<li>Revise the statement if support is unavailable.</li></ol>" in html
+    assert "<p>One finding.</p>\n<p>Second paragraph.</p>" in html
+    assert "<p>Revise or substantiate the claim.</p>\n<ol>" in html
+    assert "<ol>\n  <li>Gather support for the statement.</li>" in html
+    assert "  <li>Revise the statement if support is unavailable.</li>\n</ol>" in html
+    assert "</ol>\n<h5>Suggested Language</h5>" in html
     assert "<h5>Suggested Language</h5>" in html
 
 

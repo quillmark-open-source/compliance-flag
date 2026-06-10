@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.2.1 - 2026-06-10
+
+### Fixed
+
+- Generated HTML reports now include explicit paragraph, heading, and list
+  spacing so reports remain readable when viewed inside pages with CSS resets.
+- Generated HTML report source now emits line breaks between block elements for
+  easier inspection and review.
+
+### Changed
+
+- Refreshed the bundled example report artifacts from the newer Opus-generated
+  sample report, with sanitized repo-relative paths and current package
+  metadata.
+
 ## 0.2.0 - 2026-06-10
 
 ### Changed

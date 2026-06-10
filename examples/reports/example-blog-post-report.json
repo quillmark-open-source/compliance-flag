@@ -1,197 +1,197 @@
 {
   "report": {
-    "id": "d4e2f8a1-9c3b-4f7e-b612-8a1c3d5e7f90",
-    "generated_at": "2026-05-08T16:31:06Z",
-    "scanner_version": "0.1.0",
+    "id": "f3a1c9e2-7b4d-4e91-8a6c-2d5f0b1e3c47",
     "firm": {
       "name": "John Doe Consulting, LLC"
     },
-    "scan": {
-      "started_at": "2026-05-08T11:59:00Z",
-      "completed_at": "2026-05-08T16:31:06Z",
-      "source": {
-        "type": "file",
-        "location": "tests/fixtures/example-blog-post.html",
-        "page_title": "Q1 2026 Portfolio Update: Positioning for What's Next — John Doe Consulting"
-      }
-    },
-    "summary": {
-      "total_findings": 4,
-      "by_severity": {
-        "critical": 0,
-        "high": 0,
-        "medium": 2,
-        "low": 2
-      },
-      "by_category": {
-        "general_prohibitions": 2,
-        "recordkeeping": 1,
-        "form_adv": 1
-      }
-    },
-    "executive_summary": "This scan reviewed a Q1 2026 portfolio update blog post published by John Doe Consulting, LLC. Overall, the content demonstrates strong compliance awareness: it sources market data claims, includes balanced discussion of both successful and unsuccessful prior views, provides extensive risk disclosures for the international allocation thesis, and includes a substantive disclosure footer. No critical or high-severity issues were identified.\n\nTwo medium-severity findings were noted. First, the article discusses specific prior investment advice (the Fed easing call and the small-cap/large-cap narrowing call) which, while presented with some balancing language, constitutes a selective presentation of only two prior views out of what was presumably a broader set of recommendations. The article acknowledges these are not comprehensive but the selection of one correct and one incorrect call could still create a misleadingly balanced impression if the overall track record skewed differently. Second, the article was published January 15, 2026, and is now nearly four months old; its forward-looking positioning commentary and market data as of December 31, 2025 may be stale and potentially misleading if market conditions have materially changed.\n\nTwo low-severity findings address recordkeeping obligations: the firm should ensure it retains documentation supporting the performance and market data calculations cited, and should confirm that its Form ADV Part 2A accurately reflects the international allocation strategy shift described in this content. Remediation priorities should focus on reviewing whether the selective presentation of prior views requires additional context, and establishing a content review cadence to update or retire stale market commentary.",
+    "executive_summary": "This review covers a single piece of marketing content — a Q1 2026 portfolio commentary blog post titled 'Q1 2026 Portfolio Update: Positioning for What's Next,' published January 15, 2026 by John Doe Consulting, LLC, an SEC-registered investment adviser. The piece qualifies as an 'advertisement' under SEC Rule 275.206(4)-1(e)(1) because it is disseminated to more than one person and offers/promotes the adviser's investment views and services. Overall, the content reflects a strong compliance posture: it presents market index returns with sources, discloses a prior view that proved incorrect alongside one that proved correct, provides fair and balanced treatment of risks for its international reallocation theme, includes a robust disclosure block, correctly frames SEC registration as not implying skill, and notes that the themes discussed are selected examples that do not represent all advice. No firm-specific performance figures are presented, so the performance advertising provisions of paragraph (d) are largely not implicated.\n\nThe residual risks are modest and primarily procedural. They cluster around three recurring themes: (1) references to specific investment advice and prior 'calls,' which require fair-and-balanced treatment and supporting books-and-records; (2) substantiation of factual assertions about what the firm told clients and about market data; and (3) the time-sensitive nature of the commentary, which references rate levels and forward-looking views 'as of January 2026' that may have become stale when read months later. None of these rise to a clear violation on the face of the content given the existing mitigating disclosures.\n\nPrioritized recommendations: (a) confirm contemporaneous documentation exists for the prior views attributed to the firm and for the current 'full record of recommendations available upon request' statement; (b) retain the advertisement and all supporting calculation/source materials per Rule 275.204-2; and (c) implement an archiving/expiration convention so dated market commentary is clearly time-stamped and removed or updated before it becomes misleading. These are low-to-medium severity items appropriate for routine reviewer follow-up rather than urgent escalation.",
     "findings": [
       {
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "id": "a1b2c3d4-1111-4a2b-9c3d-5e6f7a8b9c01",
         "severity": "medium",
         "category": "general_prohibitions",
         "rule": {
           "authority": "SEC",
           "citation": "§ 275.206(4)-1(a)(5)",
-          "rule_name": "Fair and Balanced Presentation of Specific Investment Advice",
-          "description": "An advertisement may not include a reference to specific investment advice provided by the adviser where such investment advice is not presented in a manner that is fair and balanced."
+          "rule_name": "Fair and Balanced Reference to Specific Investment Advice",
+          "description": "An advertisement may not reference specific investment advice provided by the adviser unless presented in a manner that is fair and balanced."
         },
         "related_rules": [
           {
             "authority": "SEC",
-            "citation": "§ 275.206(4)-1(a)(7)",
-            "rule_name": "Otherwise Materially Misleading"
+            "citation": "§ 275.206(4)-1(a)(6)",
+            "rule_name": "Fair and Balanced Performance/Time Period Presentation"
           }
         ],
         "source": {
           "type": "file",
           "location": "tests/fixtures/example-blog-post.html",
-          "accessed_at": "2026-05-08T11:59:00Z"
+          "accessed_at": "2026-06-09T00:00:00Z"
         },
         "content": {
-          "excerpt": "Last January, we shared several views with clients. Among these, we expected the Fed would likely begin easing in the second half of the year; the Fed did begin cutting rates in September... We also anticipated a narrowing of the large-cap/small-cap valuation gap, which did not materialize",
-          "context": "The article selects exactly two prior views — one that proved correct and one that did not — from what is described as a broader set of views shared with clients. The article states 'these two examples are not a complete account of all positions or themes discussed with clients during the year' and offers a full record upon request."
+          "excerpt": "Last January, we shared several views with clients. Among these, we expected the Fed would likely begin easing in the second half of the year; the Fed did begin cutting rates in September... We also anticipated a narrowing of the large-cap/small-cap valuation gap, which did not materialize.",
+          "context": "The post recounts two prior views — one correct (Fed easing) and one incorrect (small-cap convergence) — and adds: 'Not every view works, and these two examples are not a complete account of all positions or themes discussed with clients during the year. A full record of recommendations is available upon request.'"
         },
         "violation": {
-          "explanation": "The article references specific prior investment advice by highlighting two selected views from a broader set of recommendations. While the firm commendably includes one incorrect call and disclaims completeness, the curated selection of exactly one 'win' and one 'loss' could create a misleadingly balanced impression if the firm's overall track record of views during the year was materially different (e.g., if there were many more incorrect calls). Under § 275.206(4)-1(a)(5), references to specific investment advice must be presented in a fair and balanced manner, and cherry-picking — even with partial balance — from a larger universe of recommendations may not satisfy this requirement.",
+          "explanation": "The post references specific investment advice/views previously given to clients. Highlighting a 'hit' (the correct Fed call) creates a risk of selectively presenting past advice favorably. The rule requires that any reference to specific investment advice be fair and balanced. The piece partially mitigates this concern by also disclosing a view that did not work out, stating the examples are not a complete account, and offering a full record upon request — but a reviewer should confirm the selection of examples is genuinely representative and not skewed toward successful calls.",
           "remediation": {
-            "summary": "Provide a more comprehensive accounting of prior views or ensure the selected examples are representative of the overall advisory record.",
+            "summary": "Confirm the prior-view examples are representative and balanced, and retain support for the 'full record upon request' offer.",
             "steps": [
-              "Review the full set of investment views and recommendations shared with clients during 2025 to assess whether the two selected examples are representative of the overall track record.",
-              "If the two examples are not representative, either include additional examples that more fully reflect the range of outcomes, or provide a summary statement characterizing the overall accuracy of the firm's 2025 views.",
-              "Consider strengthening the existing disclaimer language to more explicitly state that the selected examples may not be representative of all advice given.",
-              "Retain documentation of the complete set of 2025 views and the rationale for selecting the two examples presented, per § 275.204-2(a)(11)."
+              "Review how the two highlighted prior views were selected and confirm they are representative rather than chosen to emphasize accuracy.",
+              "Ensure the firm can actually produce the promised 'full record of recommendations' on request and that it fairly reflects both successful and unsuccessful views.",
+              "Consider adding a brief note quantifying or characterizing the firm's overall track record of views so a single correct call is not overweighted in the reader's impression."
             ],
-            "suggested_language": "The two examples above were selected to illustrate both a view that proved directionally correct and one that did not. They are not representative of all views shared with clients during 2025, and the overall mix of correct and incorrect views may differ from what these two examples suggest. A complete record of all investment views and recommendations is available upon request."
+            "suggested_language": "The views referenced above are selected illustrative examples and are not representative of all positions or recommendations. Some prior views were correct and others were not; a complete record of the firm's views and recommendations for the period is available upon request."
           }
         }
       },
       {
-        "id": "b2c3d4e5-f6a7-8901-bcde-f23456789012",
-        "severity": "medium",
+        "id": "b2c3d4e5-2222-4b3c-8d4e-6f7a8b9c0d12",
+        "severity": "low",
         "category": "general_prohibitions",
         "rule": {
           "authority": "SEC",
-          "citation": "§ 275.206(4)-1(a)(1)",
-          "rule_name": "Untrue Statements of Material Fact / Stale Content",
-          "description": "An advertisement may not include any untrue statement of a material fact, or omit to state a material fact necessary in order to make the statement made, in the light of the circumstances under which it was made, not misleading."
+          "citation": "§ 275.206(4)-1(a)(2)",
+          "rule_name": "Substantiation of Material Statements of Fact",
+          "description": "An advertisement may not include a material statement of fact that the adviser cannot substantiate upon demand by the Commission."
         },
-        "related_rules": [
-          {
-            "authority": "SEC",
-            "citation": "§ 275.206(4)-1(a)(7)",
-            "rule_name": "Otherwise Materially Misleading"
-          }
-        ],
         "source": {
           "type": "file",
           "location": "tests/fixtures/example-blog-post.html",
-          "accessed_at": "2026-05-08T11:59:00Z"
+          "accessed_at": "2026-06-09T00:00:00Z"
         },
         "content": {
-          "excerpt": "Published January 15, 2026... we've begun shifting approximately 5–10% of client equity allocations into international developed markets... the ECB has been cutting rates more aggressively than the Fed, with the deposit facility rate at 2.0% as of January 2026",
-          "context": "The article is dated January 15, 2026 and is being reviewed on May 8, 2026 — nearly four months later. It contains forward-looking investment positioning, specific monetary policy data points, and valuation assessments as of December 31, 2025, all of which may have materially changed."
+          "excerpt": "Last January, we shared several views with clients. Among these, we expected the Fed would likely begin easing in the second half of the year... We also anticipated a narrowing of the large-cap/small-cap valuation gap.",
+          "context": "The post attributes specific forward-looking views to the firm as having been communicated to clients 'last January,' and cites several third-party market data sources (S&P Dow Jones Indices, Federal Reserve, FTSE Russell, MSCI, ECB)."
         },
         "violation": {
-          "explanation": "The article is nearly four months old and contains time-sensitive market commentary, monetary policy data (ECB deposit rate, Fed actions), valuation assessments, and a description of an active portfolio positioning shift. If market conditions, ECB/Fed policy, or the firm's allocation have materially changed since publication, the continued availability of this content without update or notation could render the statements misleading under § 275.206(4)-1(a)(1). The disclaimer states opinions are 'as of January 15, 2026 and are subject to change without notice,' which provides some mitigation but may not be sufficient if facts have materially changed.",
+          "explanation": "The statements that the firm 'expected' and 'anticipated' specific market outcomes and communicated these to clients in January 2025 are material factual assertions. The adviser must be able to substantiate upon SEC demand that these views were in fact made contemporaneously (e.g., dated client communications). The cited market statistics are sourced, which supports substantiation of those data points, but the firm should retain documentation backing the attributed prior views.",
           "remediation": {
-            "summary": "Establish a periodic review cadence for published market commentary and update or retire stale content.",
+            "summary": "Maintain contemporaneous documentation evidencing the prior views and the cited market data.",
             "steps": [
-              "Review the article's factual claims (ECB rate, portfolio positioning, valuation data) against current conditions and determine whether any statements have become materially misleading.",
-              "If material changes have occurred, either update the article with current information and a notation of the revision, add a prominent notice at the top indicating the content reflects views as of a prior date that may no longer be current, or remove the article from distribution.",
-              "Implement a firm policy for periodic review of published market commentary (e.g., quarterly) to identify and address stale content.",
-              "Document the review and any decisions made regarding the continued publication of this article."
+              "Locate and retain dated client communications (newsletters, letters, meeting notes) from January 2025 evidencing the Fed-easing and small-cap views described.",
+              "Retain the underlying source materials for the cited index returns and rate figures so they can be produced on demand.",
+              "Document an internal substantiation file linking each material factual claim in the article to its supporting evidence."
             ]
           }
         }
       },
       {
-        "id": "c3d4e5f6-a7b8-9012-cdef-345678901234",
+        "id": "c3d4e5f6-3333-4c4d-9e5f-7a8b9c0d1e23",
         "severity": "low",
         "category": "recordkeeping",
         "rule": {
           "authority": "SEC",
-          "citation": "§ 275.204-2(a)(16)",
-          "rule_name": "Performance Calculation Documentation",
-          "description": "Advisers must retain all accounts, books, internal working papers, and any other records necessary to form the basis for or demonstrate the calculation of any performance or rate of return presented in any advertisement."
+          "citation": "§ 275.204-2(a)(11)",
+          "rule_name": "Advertisement Retention",
+          "description": "Requires advisers to retain a copy of each advertisement disseminated, directly or indirectly."
         },
         "related_rules": [
           {
             "authority": "SEC",
-            "citation": "§ 275.204-2(a)(11)",
-            "rule_name": "Advertisement Retention"
+            "citation": "§ 275.204-2(a)(16)",
+            "rule_name": "Records Supporting Performance/Recommendation Claims"
+          },
+          {
+            "authority": "SEC",
+            "citation": "§ 275.204-2(a)(7)",
+            "rule_name": "Records of Recommendations and Advice"
           }
         ],
         "source": {
           "type": "file",
           "location": "tests/fixtures/example-blog-post.html",
-          "accessed_at": "2026-05-08T11:59:00Z"
+          "accessed_at": "2026-06-09T00:00:00Z"
         },
         "content": {
-          "excerpt": "The S&P 500 delivered another strong year in 2025, returning approximately 16% following gains of 26% in 2023 and 25% in 2024 (source: S&P Dow Jones Indices, total return)... the Russell 2000 underperformed the S&P 500 for most of the year (source: FTSE Russell, as of December 31, 2025)... Valuations in these markets remain below U.S. levels on a forward price-to-earnings basis (source: MSCI, as of December 31, 2025)... the deposit facility rate at 2.0% as of January 2026 (source: European Central Bank)",
-          "context": "The article cites multiple third-party market data points with source attributions but the firm must retain documentation supporting these figures."
+          "excerpt": "A full record of recommendations is available upon request.",
+          "context": "The article references prior recommendations and current portfolio positioning (a 5–10% reallocation to international developed markets) and offers a full record of recommendations on request."
         },
         "violation": {
-          "explanation": "The article references specific market performance figures (S&P 500 returns, Russell 2000 underperformance), valuation data, and monetary policy data points. While these are third-party index/benchmark figures rather than the firm's own portfolio performance, § 275.204-2(a)(16) requires retention of all records necessary to demonstrate the basis for any performance or rate of return presented in an advertisement. Additionally, § 275.204-2(a)(11) requires retention of a copy of every advertisement. The firm should ensure it retains: (1) a copy of this article as published, (2) source documentation for all cited market data, and (3) records of the specific data sources referenced.",
+          "explanation": "Because this advertisement references specific advice/recommendations and offers to provide a 'full record of recommendations' on request, the adviser must retain a copy of the advertisement itself and the records necessary to support the recommendations and views referenced. The article does not itself demonstrate non-compliance, but it triggers retention obligations that a reviewer should confirm are satisfied.",
           "remediation": {
-            "summary": "Retain a copy of this advertisement and all supporting source documentation for cited market data.",
+            "summary": "Confirm the advertisement and its supporting recommendation records are retained per Rule 275.204-2.",
             "steps": [
-              "Archive a copy of this article as published, including the HTML file and any versions distributed via email or other channels.",
-              "Retain source documentation for all cited market data points: S&P 500 returns (S&P Dow Jones Indices), Russell 2000 performance (FTSE Russell), MSCI valuation data, and ECB deposit rate.",
-              "Store these records in the firm's books and records system with appropriate date stamps and cross-references to this advertisement.",
-              "Ensure the records are maintained for the required retention period under § 275.204-2."
+              "Archive a copy of this blog post in the firm's advertising records, including publication date and dissemination channel.",
+              "Ensure the 'full record of recommendations' that is offered is actually maintained and readily producible.",
+              "Retain any worksheets or source documentation underlying the market figures and views referenced in the piece."
             ]
           }
         }
       },
       {
-        "id": "d4e5f6a7-b8c9-0123-defa-456789012345",
+        "id": "d4e5f6a7-4444-4d5e-8f60-8b9c0d1e2f34",
         "severity": "low",
-        "category": "form_adv",
+        "category": "general_prohibitions",
         "rule": {
           "authority": "SEC",
-          "citation": "§ 279.1",
-          "rule_name": "Form ADV Registration and Amendments",
-          "description": "Form ADV must be filed for registration and amended to reflect material changes in the adviser's business, including investment strategies and methods of analysis."
+          "citation": "§ 275.206(4)-1(a)(1)",
+          "rule_name": "Untrue or Omitted Material Fact / Stale Content",
+          "description": "An advertisement may not include an untrue statement of material fact or omit a material fact necessary to make statements not misleading."
         },
+        "related_rules": [
+          {
+            "authority": "SEC",
+            "citation": "§ 275.206(4)-1(a)(7)",
+            "rule_name": "Otherwise Materially Misleading"
+          }
+        ],
         "source": {
           "type": "file",
           "location": "tests/fixtures/example-blog-post.html",
-          "accessed_at": "2026-05-08T11:59:00Z"
+          "accessed_at": "2026-06-09T00:00:00Z"
         },
         "content": {
-          "excerpt": "we've begun shifting approximately 5–10% of client equity allocations into international developed markets",
-          "context": "The article describes an active strategic shift in client portfolio allocations from domestic to international equities, which may represent a material change in the firm's investment strategies."
+          "excerpt": "the ECB has been cutting rates more aggressively than the Fed, with the deposit facility rate at 2.0% as of January 2026... we've begun shifting approximately 5–10% of client equity allocations into international developed markets.",
+          "context": "The commentary is dated 'Published January 15, 2026' and includes time-sensitive market data and forward-looking positioning views, with a disclosure that opinions are 'as of January 15, 2026 and are subject to change without notice.'"
         },
         "violation": {
-          "explanation": "The article describes a strategic shift of 5-10% of client equity allocations into international developed markets. If this represents a new or materially different investment strategy for the firm, Form ADV Part 2A (Item 8 - Methods of Analysis, Investment Strategies, and Risk of Loss) may need to be updated to reflect this shift, and the firm should consider whether an other-than-annual amendment is warranted. The disclosure at the bottom references Form ADV Part 2 being available upon request, which is appropriate, but the firm should verify that its current Form ADV accurately describes the international allocation strategy and associated risks.",
+          "explanation": "The piece contains dated, time-sensitive market data (e.g., the ECB deposit rate 'as of January 2026') and forward-looking views that can become stale and potentially misleading if the content remains available without updating well after publication (e.g., when accessed months later in mid-2026). The 'as of' framing and 'subject to change' disclosure mitigate the concern, but stale market commentary left up indefinitely can create an inaccurate impression of current conditions or current positioning.",
           "remediation": {
-            "summary": "Verify that Form ADV Part 2A reflects the firm's current international allocation strategy.",
+            "summary": "Implement a content-aging convention so dated commentary is clearly time-bound and refreshed or removed before becoming misleading.",
             "steps": [
-              "Review the firm's current Form ADV Part 2A, particularly Item 8 (Methods of Analysis, Investment Strategies, and Risk of Loss), to confirm it adequately describes international equity allocation as part of the firm's investment approach.",
-              "If the international allocation shift represents a material change not currently reflected in Form ADV Part 2A, prepare and file an amendment.",
-              "Ensure the risks described in the Form ADV Part 2A related to international investing are consistent with those disclosed in this article (currency risk, political instability, etc.).",
-              "Deliver updated brochures to existing clients as required if a material amendment is filed."
+              "Maintain prominent date-stamping and 'as of' labeling on all market commentary (already present here).",
+              "Establish a periodic review schedule to update or archive time-sensitive commentary so outdated rate levels and positioning statements do not mislead later readers.",
+              "Consider adding a visible note that figures and positioning reflect conditions as of the publication date and may no longer be current."
             ]
           }
         }
       }
     ],
+    "summary": {
+      "total_findings": 4,
+      "by_severity": {
+        "critical": 0,
+        "high": 0,
+        "medium": 1,
+        "low": 3
+      },
+      "by_category": {
+        "general_prohibitions": 3,
+        "recordkeeping": 1
+      }
+    },
+    "generated_at": "2026-06-09T23:53:19Z",
+    "scanner_version": "0.2.1",
     "generator": {
       "name": "Compliance Flag",
       "kind": "CLI",
-      "version": "0.1.0",
+      "version": "0.2.1",
       "website": "https://complianceflag.com/"
     },
     "disclaimer": {
       "product": "Compliance Flag",
       "website": "https://complianceflag.com/",
       "text": "This report was generated by Compliance Flag, an automated review-support tool for identifying potential marketing compliance issues. The report is for informational and operational review purposes only and does not constitute legal, compliance, regulatory, investment, tax, accounting, or financial advice. Compliance Flag is intended only for authorized personnel reviewing websites, files, or other content they own, control, administer, or have explicit permission to assess. Do not use Compliance Flag to scan third-party websites or content without authorization. Findings are potential issues for review by qualified personnel and are not final determinations that any communication violates or satisfies applicable requirements. Compliance Flag is not affiliated with, endorsed by, or acting on behalf of the SEC or any other regulator. Regulatory references are based on bundled source materials and may not reflect later developments."
+    },
+    "scan": {
+      "started_at": "2026-06-09T23:52:11Z",
+      "completed_at": "2026-06-09T23:53:19Z",
+      "source": {
+        "type": "file",
+        "location": "tests/fixtures/example-blog-post.html",
+        "page_title": "Q1 2026 Portfolio Update: Positioning for What's Next — John Doe Consulting"
+      }
     }
   }
 }
